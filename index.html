@@ -43,7 +43,7 @@ body.perf{
   --tr:.08s linear;
 }
 body.perf .glass{ backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
-body.perf .anim,*{ animation:none !important; transition-duration:.08s !important; }
+body.perf *, body.perf *::before, body.perf *::after{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
 @media (prefers-reduced-motion: reduce){
   *{ animation:none !important; transition:none !important; scroll-behavior:auto !important; }
 }
@@ -466,8 +466,36 @@ body{background:radial-gradient(1000px 520px at 90% -12%,rgba(139,124,255,.20),t
 .support-note li{padding:4px 0}
 .floating-support{position:fixed;left:20px;bottom:22px;z-index:38;display:flex;align-items:center;gap:9px;padding:12px 17px;border:1px solid rgba(228,189,114,.45);border-radius:999px;background:linear-gradient(135deg,#8b7cff,#5144bd);color:#fff;box-shadow:0 12px 30px rgba(0,0,0,.34);cursor:pointer;font-weight:800}
 .floating-support svg{width:20px;height:20px}
+.inbox-badge{margin-right:auto;min-width:22px;height:22px;padding:0 6px;border-radius:99px;background:#e7b95e;color:#211a10;font-size:11px;font-weight:900;display:inline-flex;align-items:center;justify-content:center}
+.inbox-settings{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:16px 18px;margin-bottom:14px}
+.switch-label{display:flex;align-items:center;gap:8px;white-space:nowrap;font-size:13px;font-weight:700}.switch-label input{width:19px;height:19px;accent-color:#a99dff}
+.inbox-list{display:grid;gap:10px}.inbox-item{padding:16px;border:1px solid rgba(177,190,226,.13);border-radius:15px;background:rgba(255,255,255,.035);display:flex;gap:13px;align-items:flex-start}.inbox-item.unread{border-color:rgba(232,189,96,.42);background:rgba(232,189,96,.07)}.inbox-mark{width:10px;height:10px;border-radius:50%;background:#e8bd60;margin-top:7px;flex:0 0 auto}.inbox-item.read .inbox-mark{background:#65708a}.inbox-body{min-width:0;flex:1}.inbox-title{font-weight:800;margin-bottom:5px}.inbox-meta{color:var(--muted);font-size:12px;line-height:1.9}.inbox-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.inbox-actions button{font-size:12px}
+@media(max-width:560px){.inbox-item{padding:12px}.inbox-settings{align-items:flex-start}}
+
 @media(max-width:860px){.content{padding:16px 14px 100px}.topbar{padding:9px 12px}.support-layout{grid-template-columns:1fr}.floating-support{bottom:calc(78px + env(safe-area-inset-bottom));left:12px;padding:10px 14px}}
 @media(max-width:560px){.photo-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.photo-card img{height:150px}.photo-card-body{padding:10px}.photo-card-meta{display:block}.support-card{padding:20px}.section-title{font-size:18px}}
+
+
+/* ================= iOS INSPIRED GLASS + MOTION FINISH ================= */
+:root{--radius:24px;--radius-sm:17px;--glass:rgba(255,255,255,.075);--glass2:rgba(255,255,255,.115);--glass-brd:rgba(255,255,255,.17);--shadow:0 18px 55px rgba(0,0,0,.28);--tr:.32s cubic-bezier(.2,.75,.25,1)}
+body{background:radial-gradient(900px 650px at 95% -5%,rgba(167,139,250,.22),transparent 62%),radial-gradient(750px 520px at 0% 100%,rgba(214,183,124,.12),transparent 58%),linear-gradient(145deg,#090b16 0%,#17152a 52%,#0d1020 100%);background-attachment:fixed}
+.sidebar,.topbar,.bottom-nav,.card.glass,.modal,.photo-card,.inbox-item,.stat-card,.panel,.dropdown-menu{background:linear-gradient(145deg,rgba(255,255,255,.105),rgba(255,255,255,.035));border:1px solid rgba(255,255,255,.16);box-shadow:0 16px 42px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.11);backdrop-filter:blur(26px) saturate(155%);-webkit-backdrop-filter:blur(26px) saturate(155%)}
+.card.glass,.photo-card,.inbox-item,.stat-card,.btn,.nav-item,.bn-item,.icon-btn,.input,select,textarea{transition:transform var(--tr),background var(--tr),border-color var(--tr),box-shadow var(--tr),opacity var(--tr),filter var(--tr)}
+.card.glass:hover,.photo-card:hover,.stat-card:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.25);box-shadow:0 22px 50px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.14)}
+.btn{box-shadow:0 5px 18px rgba(0,0,0,.13),inset 0 1px 0 rgba(255,255,255,.13)}
+.btn:active,.nav-item:active,.bn-item:active,.icon-btn:active{transform:scale(.965)}
+.nav-item,.bn-item{border-radius:16px}
+.input,select,textarea{background:rgba(255,255,255,.065);border-color:rgba(255,255,255,.15);border-radius:15px;backdrop-filter:blur(12px)}
+.input:focus,select:focus,textarea:focus{border-color:rgba(167,139,250,.75);box-shadow:0 0 0 4px rgba(167,139,250,.13)}
+.view{animation:iosPageIn .42s cubic-bezier(.2,.75,.25,1)}
+@keyframes iosPageIn{from{opacity:0;transform:translateY(9px) scale(.992);filter:blur(3px)}to{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}}
+.inbox-item{animation:iosCardIn .35s both}.inbox-item:nth-child(2){animation-delay:.035s}.inbox-item:nth-child(3){animation-delay:.07s}.inbox-item:nth-child(4){animation-delay:.105s}
+@keyframes iosCardIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.photo-card{overflow:hidden}.photo-card img{transition:transform .55s cubic-bezier(.2,.75,.25,1),filter .4s}.photo-card:hover img{transform:scale(1.035);filter:saturate(1.08)}
+.switch .slider,.switch-label span{transition:background .25s,box-shadow .25s}
+@media(hover:none){.card.glass:hover,.photo-card:hover,.stat-card:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+body.perf .sidebar,body.perf .topbar,body.perf .bottom-nav,body.perf .card.glass,body.perf .photo-card,body.perf .inbox-item{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 
 </style>
   <meta property="og:image" content="https://bolt.new/static/og_default.png">
@@ -511,6 +539,7 @@ body{background:radial-gradient(1000px 520px at 90% -12%,rgba(139,124,255,.20),t
         <div class="nav-label">عملیات</div>
         <button class="nav-item" data-view="reports"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M7 14l4-4 4 4 5-5"></path></svg>گزارش‌ها</button>
         <button class="nav-item" data-view="history"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>تاریخچه عملیات</button>
+        <button class="nav-item" data-view="inbox"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="M3 13h5l2 3h4l2-3h5"></path></svg>اینباکس <span id="inboxBadge" class="inbox-badge" style="display:none">۰</span></button>
         <button class="nav-item" data-view="recycle"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path></svg>سطل زباله</button>
       </div>
       <div class="nav-group">
@@ -641,6 +670,14 @@ body{background:radial-gradient(1000px 520px at 90% -12%,rgba(139,124,255,.20),t
         <div class="card glass" style="margin-top:14px;max-width:680px"><h2 style="font-size:var(--fs-lg);margin:0 0 10px">آخرین خروجی‌ها</h2><div id="recentOutgoing"></div></div>
       </section>
 
+      <!-- INBOX -->
+      <section class="view" id="view-inbox">
+        <div class="page-head"><div><h1 class="page-title">اینباکس اعلان‌ها</h1><div class="page-sub">اعلان‌های ورود، خروج کالا و تصاویر جدید انبار</div></div><div class="actions"><button class="btn btn-ghost btn-sm" id="markAllReadBtn">خواندن همه</button></div></div>
+        <div class="card glass inbox-settings"><div><strong>دریافت همه اعلان‌ها</strong><div class="hint">ورود و خروج کالا و بارگذاری عکس؛ این تنظیم فقط برای حساب شماست.</div></div><label class="switch-label"><input type="checkbox" id="inboxEnabled" checked><span>فعال</span></label></div>
+        <div class="filter-bar"><button class="btn btn-primary btn-sm" data-inbox-filter="all">همه</button><button class="btn btn-ghost btn-sm" data-inbox-filter="unread">خوانده‌نشده</button><button class="btn btn-ghost btn-sm" data-inbox-filter="read">خوانده‌شده</button></div>
+        <div id="inboxList" class="inbox-list"></div><div id="inboxEmpty" class="empty" style="display:none"><div class="t">اعلانی وجود ندارد</div><div class="s">اعلان‌های ورود، خروج و تصاویر جدید اینجا نمایش داده می‌شوند.</div></div>
+      </section>
+
       <!-- REPORTS -->
       <section class="view" id="view-reports">
         <div class="page-head">
@@ -764,7 +801,7 @@ body{background:radial-gradient(1000px 520px at 90% -12%,rgba(139,124,255,.20),t
         <div class="card glass">
           <h2 style="font-size:var(--fs-lg);margin:0 0 14px">نمایش و کارایی</h2>
           <div class="field" style="display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:8px">
-            <div><div style="font-weight:700">حالت بهینه</div><div class="hint">غیرفعال کردن افکت‌های گرافیکی برای دستگاه‌های ضعیف</div></div>
+            <div><div style="font-weight:700">انیمیشن‌ها و افکت‌های حرکتی</div><div class="hint">خاموش‌کردن حرکت‌ها و ترنزیشن‌ها برای تجربه ساده‌تر یا دستگاه‌های ضعیف</div></div>
             <label class="switch"><input type="checkbox" id="perfToggle"><span class="slider"></span></label>
           </div>
           <div class="divider"></div>
@@ -820,7 +857,7 @@ body{background:radial-gradient(1000px 520px at 90% -12%,rgba(139,124,255,.20),t
 var DB_NAME = "warehouseDB";
 var DB_VERSION = 1;
 var STORES = ["products","transactions","history","recycleBin","settings"];
-var APP_VERSION = "1.0.0";
+var APP_VERSION = "1.1.0";
 var PAGE_SIZE = 20;
 var JALALI_MONTHS = ["فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"];
 var WEEKDAYS = ["یکشنبه","دوشنبه","سه‌شنبه","چهارشنبه","پنجشنبه","جمعه","شنبه"];
@@ -870,8 +907,8 @@ function jalaliToDate(jy,jm,jd){
 function formatJalali(ts,withTime){
   var d=new Date(ts);
   var j=gregorianToJalali(d.getFullYear(),d.getMonth()+1,d.getDate());
-  var s=toFa(j[0])+"/"+pad2(j[1])+"/"+pad2(j[2]);
-  if(withTime) s+=" - "+pad2(d.getHours())+":"+pad2(d.getMinutes());
+  var s=toFa(j[0])+"/"+toFa(pad2(j[1]))+"/"+toFa(pad2(j[2]));
+  if(withTime) s+=" - "+toFa(pad2(d.getHours())+":"+pad2(d.getMinutes()));
   return s;
 }
 function formatTimeShort(ts){ var d=new Date(ts); return toFa(pad2(d.getHours())+":"+pad2(d.getMinutes())); }
@@ -933,6 +970,7 @@ async function openDB(){
   realtimeChannel=sb.channel("mitra-warehouse-live")
     .on("postgres_changes",{event:"*",schema:"public",table:"warehouse_records"},function(payload){
       if(payload.new && payload.new.store_name==="history") return;
+      if(payload.new && payload.new.store_name==="inbox" && payload.new.payload && payload.new.payload.userId===currentUser.id){ updateInboxBadge(); if(currentView==="inbox" && document.visibilityState==="visible") renderInbox(); }
       if(document.visibilityState==="visible"){
         renderView(currentView);
         if(currentView==="outgoing") renderOutgoingSelect();
@@ -1037,6 +1075,7 @@ function renderView(name){
   else if(name==="outgoing"){ renderOutgoingSelect(); renderRecent("outgoing"); }
   else if(name==="reports") renderReports();
   else if(name==="history") renderHistory();
+  else if(name==="inbox") renderInbox();
   else if(name==="recycle") renderRecycle();
   else if(name==="backup") renderDbInfo();
   else if(name==="settings") renderSettings();
@@ -1075,7 +1114,7 @@ var perfToggle=document.getElementById("perfToggle");
 var perfBtn=document.getElementById("perfBtn");
 async function initPerf(){ applyPerf(await getSetting("perf",false)); }
 function applyPerf(on){ document.body.classList.toggle("perf",on); perfToggle.checked=on; perfBtn.style.color=on?"var(--gold2)":""; }
-perfToggle.addEventListener("change",function(){ applyPerf(perfToggle.checked); setSetting("perf",perfToggle.checked); toast(perfToggle.checked?"حالت بهینه فعال شد.":"حالت بهینه غیرفعال شد.","info"); });
+perfToggle.addEventListener("change",function(){ applyPerf(perfToggle.checked); setSetting("perf",perfToggle.checked); toast(perfToggle.checked?"انیمیشن‌ها و افکت‌ها خاموش شدند.":"انیمیشن‌ها و افکت‌ها روشن شدند.","info"); });
 perfBtn.addEventListener("click",function(){ perfToggle.checked=!perfToggle.checked; perfToggle.dispatchEvent(new Event("change")); });
 
 /* DASHBOARD */
@@ -1399,6 +1438,27 @@ document.getElementById("clearHistBtn").addEventListener("click",function(){
   confirmModal("پاک کردن تاریخچه","تمام رکوردهای تاریخچه حذف می‌شوند. این عمل قابل بازگشت نیست.","پاک کردن",async function(){ await dbClear("history"); toast("تاریخچه پاک شد.","ok"); renderHistory(); },{danger:true});
 });
 
+/* INBOX — only inventory incoming/outgoing notifications */
+var inboxFilter="all";
+async function inboxRows(){
+  var rows=await dbGetAll("inbox");
+  return rows.filter(function(n){return n && n.userId===currentUser.id && (n.type==="incoming"||n.type==="outgoing"||n.type==="photo");}).sort(function(a,b){return (b.timestamp||0)-(a.timestamp||0);});
+}
+async function updateInboxBadge(){
+  try{var rows=await inboxRows();var count=rows.filter(function(n){return !n.read;}).length;var b=document.getElementById("inboxBadge");if(b){b.textContent=toFa(count);b.style.display=count?"inline-flex":"none";}}catch(e){}
+}
+async function renderInbox(){
+  var enabled=await dbGet("notification_settings",currentUser.id);var toggle=document.getElementById("inboxEnabled");if(toggle)toggle.checked=!(enabled&&enabled.enabled===false);
+  var rows=await inboxRows();var filtered=rows.filter(function(n){return inboxFilter==="all"||(inboxFilter==="unread"&&!n.read)||(inboxFilter==="read"&&n.read);});
+  var list=document.getElementById("inboxList"),empty=document.getElementById("inboxEmpty");
+  if(!filtered.length){list.innerHTML="";empty.style.display="block";}else{empty.style.display="none";list.innerHTML=filtered.map(function(n){var isPhoto=n.type==="photo",isIn=n.type==="incoming";var title=isPhoto?"تصویر جدید در گالری انبار":(isIn?"ورود کالا به انبار":"خروج کالا از انبار");var details=isPhoto?('بارگذار: '+escapeHtml(n.actorName||"کاربر")+'<br>توضیحات: '+escapeHtml(n.caption||"بدون توضیحات")):('برند: '+escapeHtml(n.brand||"—")+' · سایز: '+escapeHtml(n.size||"—")+' · تعداد: '+toFa(n.quantity||0)+'<br>ثبت‌کننده: '+escapeHtml(n.actorName||"کاربر"));return '<article class="inbox-item '+(n.read?"read":"unread")+'"><span class="inbox-mark"></span><div class="inbox-body"><div class="inbox-title">'+title+(isPhoto?'':' · '+escapeHtml(n.productName||""))+'</div><div class="inbox-meta">'+details+'<br>'+formatJalali(n.timestamp,true)+'</div><div class="inbox-actions">'+(!n.read?'<button class="btn btn-ghost btn-sm" onclick="app.markInboxRead(\''+n.id+'\')">علامت‌گذاری به‌عنوان خوانده‌شده</button>':'<span class="hint">خوانده‌شده</span>')+'</div></div></article>';}).join("");}
+  await updateInboxBadge();
+}
+async function markInboxRead(id){var n=await dbGet("inbox",id);if(!n||n.userId!==currentUser.id)return;n.read=true;n.readAt=now();await dbPut("inbox",n);await renderInbox();}
+document.getElementById("inboxEnabled").addEventListener("change",async function(){await dbPut("notification_settings",{id:currentUser.id,enabled:this.checked});toast(this.checked?"اعلان‌های ورود و خروج فعال شد.":"اعلان‌های جدید برای شما غیرفعال شد.","ok");});
+document.getElementById("markAllReadBtn").addEventListener("click",async function(){var rows=await inboxRows();for(var i=0;i<rows.length;i++){if(!rows[i].read){rows[i].read=true;rows[i].readAt=now();await dbPut("inbox",rows[i]);}}await renderInbox();toast("همه اعلان‌ها خوانده شدند.","ok");});
+document.querySelectorAll("[data-inbox-filter]").forEach(function(b){b.addEventListener("click",function(){inboxFilter=b.dataset.inboxFilter;document.querySelectorAll("[data-inbox-filter]").forEach(function(x){x.className=x===b?"btn btn-primary btn-sm":"btn btn-ghost btn-sm";});renderInbox();});});
+
 /* RECYCLE */
 async function renderRecycle(){
   var items=await dbGetAll("recycleBin"); items.sort(function(a,b){return (b.deletedAt||0)-(a.deletedAt||0);});
@@ -1596,11 +1656,11 @@ function showSwUpdateToast(reg){
 }
 
 /* PUBLIC API */
-window.app={editProduct:editProduct,deleteProduct:deleteProduct,restoreProduct:restoreProduct,purgeProduct:purgeProduct,closeModal:closeModal};
+window.app={editProduct:editProduct,deleteProduct:deleteProduct,restoreProduct:restoreProduct,purgeProduct:purgeProduct,markInboxRead:markInboxRead,closeModal:closeModal};
 
 /* INIT */
 openDB().then(async function(){
-  await initPerf(); renderView(currentView); renderOutgoingSelect();
+  await initPerf(); renderView(currentView); renderOutgoingSelect(); await updateInboxBadge();
   var p=document.getElementById("netStatus");
   if(p){ p.className="status-pill online"; p.querySelector("span:last-child").textContent="اتصال ابری"; }
 }).catch(function(err){
