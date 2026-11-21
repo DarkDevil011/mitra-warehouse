@@ -10,6 +10,7 @@
 <meta name="apple-mobile-web-app-title" content="mitra warehouse">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="64x64" href="./icons/favicon-64.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512.png">
@@ -656,7 +657,8 @@ body.perf .sidebar,body.perf .topbar,body.perf .bottom-nav,body.perf .card.glass
         <div class="page-head"><div><h1 class="page-title">خروج کالا</h1><div class="page-sub">ثبت خروج کالا از انبار</div></div></div>
         <div class="card glass" style="max-width:680px">
           <form id="outgoingForm" autocomplete="off">
-            <div class="field"><label>کالا <span class="req">*</span></label><select class="select" name="productId" required="" id="outProductSel"><option value="">انتخاب کالا...</option><option value="mtpmqfat-neoa9p" data-qty="1">10 هزار - بهخواب - 180*200 (موجودی: ۱)</option><option value="mtpmrzki-es29o2" data-qty="1">10 هزار - بهخواب - 140*200 (موجودی: ۱)</option><option value="mtpmsjml-yc5yj1" data-qty="1">6 هزار - بهخواب - 140*200 (موجودی: ۱)</option><option value="mtpmx5vu-cwheuf" data-qty="1">6 هزار - بهخواب - 180*200 (موجودی: ۱)</option><option value="mtpmvk41-lk4lvh" data-qty="1">اسلیپ گلد - ماکسیمم - 180*200 (موجودی: ۱)</option><option value="mtpmxrei-b223qu" data-qty="3">الای هوم - دکتر بیست - 160 (موجودی: ۳)</option><option value="mtpmv9cu-qb4wp4" data-qty="1">التراپدیک مترس - ماکسیمم - 180*200 (موجودی: ۱)</option><option value="mtpmud3i-f1ixhb" data-qty="1">بونل کامفورت - دکتر بیست - 160*200 (موجودی: ۱)</option><option value="mtpmuvtu-dlxxx2" data-qty="1">بونل کامفورت - دکتر بیست - 180*200 (موجودی: ۱)</option><option value="mtpmtxtq-seauq1" data-qty="1">پردیس - میترا - 160*200 (موجودی: ۱)</option><option value="mtpmswkz-pyhmz0" data-qty="3">پرناز - میترا - 140*200 (موجودی: ۳)</option><option value="mtpmw7qc-zpmvea" data-qty="1">پرناز - میترا - 160*200 (موجودی: ۱)</option><option value="mtpmumiy-z5gr05" data-qty="1">پرواز - میترا - 140*200 (موجودی: ۱)</option><option value="mtpmwlx3-q6ga04" data-qty="2">پرین - میرا - 200*200 (موجودی: ۲)</option><option value="mtpmrmrz-u94wps" data-qty="1">سوپر - بهخواب - 160*200 (موجودی: ۱)</option><option value="mtpmxel8-4dujp7" data-qty="1">سوپر - بهخواب - 180*200 (موجودی: ۱)</option><option value="mtpmvy15-y2ik7p" data-qty="1">عمارت - متفرقه - 180*200 (موجودی: ۱)</option></select><div class="err-msg"></div><div id="outStockInfo" class="hint" style="margin-top:6px"></div></div>
+            <div class="field"><label for="outProductSearch">جست‌وجوی سریع کالا</label><input class="input" id="outProductSearch" type="search" placeholder="نام تشک، برند یا سایز را بنویسید..." autocomplete="off"><div class="hint" style="margin-top:5px">با تایپ نام، برند یا سایز، فهرست کالاها محدود می‌شود.</div></div>
+            <div class="field"><label>کالا <span class="req">*</span></label><select class="select" name="productId" required id="outProductSel"><option value="">ابتدا کالا را جست‌وجو یا انتخاب کنید...</option></select><div class="err-msg"></div><div id="outStockInfo" class="hint" style="margin-top:6px"></div></div>
             <div class="grid2">
               <div class="field"><label>تعداد <span class="req">*</span></label><input class="input" name="quantity" type="number" min="1" step="1" required=""><div class="err-msg"></div></div>
               <div class="field"><label>یادداشت</label><input class="input" name="notes"></div>
@@ -860,6 +862,7 @@ var STORES = ["products","transactions","history","recycleBin","settings"];
 var APP_VERSION = "1.1.0";
 var PAGE_SIZE = 20;
 var JALALI_MONTHS = ["فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"];
+var JALALI_MONTH_CHART = ["فرو","ارد","خرداد","تیر","مرداد","شهر","مهر","آبان","آذر","دی","بهمن","اسفند"];
 var WEEKDAYS = ["یکشنبه","دوشنبه","سه‌شنبه","چهارشنبه","پنجشنبه","جمعه","شنبه"];
 var FA_DIGITS = ["۰","۱","۲","۳","۴","۵","۶","۷","۸","۹"];
 
@@ -1149,7 +1152,7 @@ document.getElementById("rangeTabs").addEventListener("click",function(e){
 });
 function drawIOChart(txns,days){
   var today=new Date(); today.setHours(0,0,0,0); var buckets=[];
-  for(var i=days-1;i>=0;i--){ var d=new Date(today.getTime()-i*86400000); var j=gregorianToJalali(d.getFullYear(),d.getMonth()+1,d.getDate()); buckets.push({date:toFa(j[2])+" "+JALALI_MONTHS[j[1]-1].slice(0,3),in:0,out:0,ts:d.getTime()}); }
+  for(var i=days-1;i>=0;i--){ var d=new Date(today.getTime()-i*86400000); var j=gregorianToJalali(d.getFullYear(),d.getMonth()+1,d.getDate()); buckets.push({date:toFa(j[2])+" "+JALALI_MONTH_CHART[j[1]-1],in:0,out:0,ts:d.getTime()}); }
   txns.forEach(function(t){ var idx=Math.floor((t.timestamp-buckets[0].ts)/86400000); if(idx>=0&&idx<buckets.length){ if(t.type==="incoming") buckets[idx].in+=t.quantity; else if(t.type==="outgoing") buckets[idx].out+=t.quantity; } });
   var maxV=1; buckets.forEach(function(b){ if(b.in>maxV)maxV=b.in; if(b.out>maxV)maxV=b.out; });
   var W=600,H=240,padL=34,padR=12,padT=16,padB=40,cw=W-padL-padR,ch=H-padT-padB,bw=cw/buckets.length;
@@ -1159,8 +1162,8 @@ function drawIOChart(txns,days){
   buckets.forEach(function(b,i){ var x=padL+i*bw+bw*0.15,w=bw*0.32,yI=barY(b.in),yO=barY(b.out);
     svg+='<rect x="'+x+'" y="'+yI+'" width="'+w+'" height="'+(padT+ch-yI)+'" rx="3" fill="#7C3AED"><title>ورود: '+b.in+'</title></rect>';
     svg+='<rect x="'+(x+w+2)+'" y="'+yO+'" width="'+w+'" height="'+(padT+ch-yO)+'" rx="3" fill="#D6B77C"><title>خروج: '+b.out+'</title></rect>';
-    if(buckets.length<=15) svg+='<text x="'+(x+w)+'" y="'+(H-padB+18)+'" text-anchor="middle" font-size="10" fill="#8a829c">'+b.date+'</text>';
-    else if(i%2===0) svg+='<text x="'+(x+w)+'" y="'+(H-padB+18)+'" text-anchor="middle" font-size="9" fill="#8a829c">'+b.date+'</text>';
+    if(buckets.length<=15) svg+='<text x="'+(x+w)+'" y="'+(H-padB+18)+'" text-anchor="middle" font-size="11" font-weight="600" fill="#C9C3D6">'+b.date+'</text>';
+    else if(i%2===0) svg+='<text x="'+(x+w)+'" y="'+(H-padB+18)+'" text-anchor="middle" font-size="10" font-weight="600" fill="#C9C3D6">'+b.date+'</text>';
   });
   svg+='</svg><div class="legend"><div class="legend-item"><span class="legend-dot" style="background:#7C3AED"></span>ورود</div><div class="legend-item"><span class="legend-dot" style="background:#D6B77C"></span>خروج</div></div>';
   document.getElementById("ioChart").innerHTML=svg;
@@ -1320,15 +1323,30 @@ async function renderRecent(type){
 }
 
 /* OUTGOING */
-async function renderOutgoingSelect(){
-  var products=await dbGetAll("products"); products.sort(function(a,b){return (a.name||"").localeCompare(b.name||"","fa");});
-  var sel=document.getElementById("outProductSel"); var current=sel.value;
-  sel.innerHTML='<option value="">انتخاب کالا...</option>'+products.map(function(p){return '<option value="'+p.id+'" data-qty="'+p.quantity+'">'+escapeHtml(p.name)+' - '+escapeHtml(p.brand)+' - '+escapeHtml(p.size)+' (موجودی: '+toFa(p.quantity)+')</option>';}).join("");
-  if(current) sel.value=current;
+var outgoingProductsCache=[];
+async function renderOutgoingSelect(query){
+  var products=await dbGetAll("products");
+  products.sort(function(a,b){return (a.name||"").localeCompare(b.name||"","fa");});
+  outgoingProductsCache=products;
+  var sel=document.getElementById("outProductSel");
+  var current=sel.value;
+  var q=(query!==undefined?query:(document.getElementById("outProductSearch")||{}).value||"").trim().toLocaleLowerCase("fa");
+  var filtered=products.filter(function(p){
+    var hay=[p.name,p.brand,p.size].join(" ").toLocaleLowerCase("fa");
+    return !q || hay.indexOf(q)!==-1;
+  });
+  sel.innerHTML='<option value="">'+(filtered.length?'انتخاب کالا از نتایج جست‌وجو...':'کالایی با این عبارت پیدا نشد')+'</option>'+filtered.map(function(p){return '<option value="'+escapeHtml(p.id)+'" data-qty="'+p.quantity+'">'+escapeHtml(p.name)+' - '+escapeHtml(p.brand)+' - '+escapeHtml(p.size)+' (موجودی: '+toFa(p.quantity)+')</option>';}).join("");
+  if(current && filtered.some(function(p){return p.id===current;})) sel.value=current;
+  else document.getElementById("outStockInfo").innerHTML="";
 }
+document.getElementById("outProductSearch").addEventListener("input",function(){
+  var selected=document.getElementById("outProductSel"); selected.value="";
+  document.getElementById("outStockInfo").innerHTML="";
+  renderOutgoingSelect(this.value);
+});
 document.getElementById("outProductSel").addEventListener("change",function(){
-  var opt=this.options[this.selectedIndex]; var qty=opt?opt.getAttribute("data-qty"):0;
-  document.getElementById("outStockInfo").innerHTML=qty!=null?"موجودی فعلی: <b>"+toFa(qty)+"</b>":"";
+  var opt=this.options[this.selectedIndex]; var qty=opt?opt.getAttribute("data-qty"):null;
+  document.getElementById("outStockInfo").innerHTML=qty!==null&&qty!==undefined?"موجودی فعلی: <b>"+toFa(qty)+"</b>":"";
 });
 document.getElementById("outgoingForm").addEventListener("submit",async function(e){
   e.preventDefault(); var f=e.target;
