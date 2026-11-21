@@ -3,17 +3,18 @@
 <html lang="fa" dir="rtl"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#0D0818">
-<meta name="description" content="سیستم آنلاین مدیریت موجودی و عملیات انبار میترا">
+<meta name="theme-color" content="#0B1020">
+<meta name="description" content="MITRA WAREHOUSE - سامانه آنلاین مدیریت موجودی و عملیات انبار">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="مدیریت انبار">
+<meta name="apple-mobile-web-app-title" content="mitra warehouse">
 <meta name="mobile-web-app-capable" content="yes">
 <link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="64x64" href="./icons/favicon-64.png">
 <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="./icons/icon-512.png">
 <link rel="apple-touch-icon" href="./icons/apple-touch-180.png">
-<title>سیستم مدیریت انبار میترا</title>
+<title>mitra warehouse</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 /* ============================== THEME ============================== */
@@ -410,6 +411,64 @@ table.tbl td{ font-size:var(--fs-sm); }
   .content{ padding:10px 10px 90px; }
   .topbar{ padding:8px 10px; gap:8px; }
 }
+
+/* ================= MITRA WAREHOUSE / REDESIGNED UI ================= */
+:root{--bg:#0b1020;--bg2:#111a2e;--bg3:#18243c;--pri:#8b7cff;--pri2:#b8adff;--pri-deep:#5144bd;--gold:#e4bd72;--gold2:#f3d99d;--white:#f8f9ff;--muted:#c4cbe0;--muted2:#8994b0;--glass:rgba(22,31,54,.78);--glass2:rgba(33,45,73,.88);--glass-brd:rgba(177,190,226,.13);--radius:20px;--radius-sm:14px;--shadow:0 16px 48px rgba(0,0,0,.28);--glow:0 0 28px rgba(139,124,255,.22)}
+body{background:radial-gradient(1000px 520px at 90% -12%,rgba(139,124,255,.20),transparent 60%),radial-gradient(800px 500px at -5% 100%,rgba(228,189,114,.10),transparent 55%),#0b1020;line-height:1.75}
+.sidebar{background:linear-gradient(180deg,rgba(17,26,46,.98),rgba(10,15,29,.98));border-left:1px solid rgba(177,190,226,.12)}
+.brand-logo{border-radius:15px;background:linear-gradient(145deg,#9b8cff,#5144bd);box-shadow:0 10px 26px rgba(109,91,226,.30)}
+.brand-name{letter-spacing:1.1px;font-size:15px}
+.nav-label{letter-spacing:.4px;color:#8f9ab7}
+.nav-item{border-radius:13px;padding:12px 13px;margin-bottom:4px;color:#c6cce0}
+.nav-item.active{background:linear-gradient(100deg,rgba(139,124,255,.24),rgba(139,124,255,.07));box-shadow:inset -3px 0 0 #a99dff,inset 0 0 0 1px rgba(169,157,255,.14);color:#fff}
+.topbar{background:rgba(10,15,29,.82);border-bottom:1px solid rgba(177,190,226,.12);padding:12px 22px}
+.brand-mini{letter-spacing:1.2px;color:#f1e8d5}
+.content{max-width:1600px;width:100%;margin:0 auto;padding:24px 26px 40px}
+.page-title{font-size:clamp(22px,2.2vw,30px);font-weight:850;letter-spacing:-.4px}
+.page-sub{color:#9ca8c5;margin-top:3px}
+.card.glass,.stat-card.glass{background:linear-gradient(145deg,rgba(25,37,64,.88),rgba(15,23,42,.88));border:1px solid rgba(177,190,226,.13);border-radius:20px;box-shadow:0 12px 34px rgba(0,0,0,.18);backdrop-filter:blur(16px)}
+.stat-card{padding:19px 20px;min-height:118px;position:relative;overflow:hidden}
+.stat-card:after{content:"";position:absolute;left:-24px;bottom:-48px;width:120px;height:120px;border-radius:50%;background:rgba(139,124,255,.08);pointer-events:none}
+.stat-card .val{font-size:30px;font-weight:850;letter-spacing:-.7px}
+.quick-btn{border:1px solid rgba(177,190,226,.14);background:linear-gradient(145deg,rgba(34,47,76,.9),rgba(19,29,50,.9));border-radius:17px;padding:17px;min-height:90px}
+.quick-btn:hover{transform:translateY(-2px);border-color:rgba(169,157,255,.5);box-shadow:0 12px 26px rgba(0,0,0,.2)}
+.input,.select,.textarea{background:rgba(7,13,27,.55);border:1px solid rgba(177,190,226,.18);border-radius:12px;min-height:44px}
+.input:focus,.select:focus,.textarea:focus{border-color:#a99dff;box-shadow:0 0 0 3px rgba(139,124,255,.15)}
+.btn{border-radius:12px;font-weight:750;min-height:42px}
+.btn-primary{background:linear-gradient(135deg,#8b7cff,#5d50c9);box-shadow:0 8px 20px rgba(93,80,201,.22)}
+.btn-gold{background:linear-gradient(135deg,#e8c77f,#b88c45);color:#1a1720}
+.table-wrap{border:1px solid rgba(177,190,226,.12);border-radius:14px;overflow:auto}
+.tbl th{background:rgba(139,124,255,.10);color:#dcd8ff}
+.tbl td,.tbl th{border-bottom-color:rgba(177,190,226,.09)}
+.status-pill{background:rgba(255,255,255,.055);border-color:rgba(177,190,226,.14)}
+.section-kicker{font-size:11px;letter-spacing:1.7px;color:#c8b8ff;font-weight:800;margin-bottom:5px}
+.section-title{font-size:20px;font-weight:850;margin:0 0 8px}
+.photo-upload-card{max-width:760px;padding:24px}
+.photo-upload-card .muted{margin:0 0 18px;font-size:13px}
+.photo-gallery-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:25px 0 14px}
+.photo-gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.photo-card{overflow:hidden;border:1px solid rgba(177,190,226,.15);border-radius:17px;background:linear-gradient(145deg,rgba(25,37,64,.9),rgba(15,23,42,.92));box-shadow:0 12px 30px rgba(0,0,0,.17)}
+.photo-card img{display:block;width:100%;height:205px;object-fit:cover;background:#10182a}
+.photo-card-body{padding:13px}
+.photo-card-caption{font-size:13px;overflow-wrap:anywhere;margin-bottom:8px;min-height:24px}
+.photo-card-meta{font-size:11px;color:var(--muted2);display:flex;justify-content:space-between;gap:8px}
+.photo-card-actions{display:flex;justify-content:flex-end;margin-top:11px}
+.support-layout{display:grid;grid-template-columns:minmax(0,560px) minmax(260px,360px);gap:18px;align-items:start}
+.support-card{padding:28px;text-align:center}
+.support-icon{width:70px;height:70px;border-radius:22px;margin:0 auto 14px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(139,124,255,.28),rgba(81,68,189,.16));border:1px solid rgba(169,157,255,.24);color:#e4ddff}
+.support-icon svg{width:34px;height:34px}
+.support-info{display:flex;justify-content:space-between;gap:15px;padding:14px 2px;border-bottom:1px solid rgba(177,190,226,.12);text-align:right}
+.support-info span{color:var(--muted2)}
+.support-call{display:flex;justify-content:center;margin-top:20px;text-decoration:none}
+.support-note{padding:22px}
+.support-note h3{font-size:17px;margin:0 0 12px}
+.support-note ul{padding-right:20px;margin:0 0 14px;color:#d6dcef}
+.support-note li{padding:4px 0}
+.floating-support{position:fixed;left:20px;bottom:22px;z-index:38;display:flex;align-items:center;gap:9px;padding:12px 17px;border:1px solid rgba(228,189,114,.45);border-radius:999px;background:linear-gradient(135deg,#8b7cff,#5144bd);color:#fff;box-shadow:0 12px 30px rgba(0,0,0,.34);cursor:pointer;font-weight:800}
+.floating-support svg{width:20px;height:20px}
+@media(max-width:860px){.content{padding:16px 14px 100px}.topbar{padding:9px 12px}.support-layout{grid-template-columns:1fr}.floating-support{bottom:calc(78px + env(safe-area-inset-bottom));left:12px;padding:10px 14px}}
+@media(max-width:560px){.photo-gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.photo-card img{height:150px}.photo-card-body{padding:10px}.photo-card-meta{display:block}.support-card{padding:20px}.section-title{font-size:18px}}
+
 </style>
   <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -419,17 +478,12 @@ table.tbl td{ font-size:var(--fs-sm); }
 
 <div id="authGate" style="position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;padding:20px;background:rgba(8,4,18,.94);backdrop-filter:blur(18px)">
   <form id="authForm" class="glass" style="width:100%;max-width:420px;padding:26px">
-    <div id="authTitle" style="font-size:22px;font-weight:800;margin-bottom:6px">ورود به انبار میترا</div>
-    <div id="authDescription" style="color:var(--muted);font-size:13px;margin-bottom:20px">برای ورود، ایمیل و رمز عبور خود را وارد کنید.</div>
-    <div class="field" id="authNameField" style="display:none"><label for="authName">نام و نام خانوادگی</label><input class="input" id="authName" type="text" autocomplete="name" maxlength="70"></div>
+    <div style="font-size:22px;font-weight:800;margin-bottom:6px">ورود به انبار میترا</div>
+    <div style="color:var(--muted);font-size:13px;margin-bottom:20px">برای ورود، ایمیل و رمز عبور حساب اختصاصی خود را وارد کنید.</div>
     <div class="field"><label for="authEmail">ایمیل</label><input class="input" id="authEmail" type="email" autocomplete="username" required></div>
-    <div class="field"><label for="authPassword">رمز عبور</label><input class="input" id="authPassword" type="password" autocomplete="new-password" minlength="8" required></div>
+    <div class="field"><label for="authPassword">رمز عبور</label><input class="input" id="authPassword" type="password" autocomplete="current-password" required></div>
     <div id="authError" style="color:#f87171;font-size:13px;margin-bottom:12px"></div>
     <button class="btn btn-primary btn-block" id="authSubmit" type="submit">ورود</button>
-    <div style="text-align:center;margin-top:16px;font-size:13px;color:var(--muted)">
-      <span id="authSwitchText">حساب نداری؟</span>
-      <button type="button" id="authSwitch" style="border:0;background:none;color:var(--pri2);font:inherit;font-weight:800;cursor:pointer">ثبت‌نام کن</button>
-    </div>
   </form>
 </div>
 
@@ -440,7 +494,7 @@ table.tbl td{ font-size:var(--fs-sm); }
       <div class="brand-logo">
         <svg viewBox="0 0 24 24" fill="none" stroke="#E8D39B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8L12 3 3 8v8l9 5 9-5V8z"></path><path d="M3 8l9 5 9-5"></path><path d="M12 13v8"></path></svg>
       </div>
-      <div><div class="brand-name">مدیریت انبار</div><div class="brand-sub">سیستم آفلاین</div></div>
+      <div><div class="brand-name">MITRA WAREHOUSE</div><div class="brand-sub">سیستم آفلاین</div></div>
     </div>
     <nav>
       <div class="nav-group">
@@ -462,6 +516,8 @@ table.tbl td{ font-size:var(--fs-sm); }
       <div class="nav-group">
         <div class="nav-label">سیستم</div>
         <button class="nav-item" data-view="backup"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M3 5v14a9 3 0 0 0 18 0V5"></path><path d="M3 12a9 3 0 0 0 18 0"></path></svg>بکاپ و ریکاوری</button>
+        <button class="nav-item" data-view="photos"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"></rect><circle cx="8.5" cy="9" r="1.5"></circle><path d="m21 15-5-5L5 20"></path></svg>تصاویر انبار</button>
+        <button class="nav-item" data-view="support"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.7 7.4L3 21l2.1-5.3A8.5 8.5 0 1 1 21 11.5Z"></path><path d="M8 12h8M8 8.5h5"></path></svg>پشتیبانی</button>
         <button class="nav-item" data-view="settings"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>تنظیمات</button>
       </div>
     </nav>
@@ -473,10 +529,10 @@ table.tbl td{ font-size:var(--fs-sm); }
   <div class="main">
     <header class="topbar">
       <button class="icon-btn menu-btn" id="menuBtn" aria-label="منو"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"></path></svg></button>
-      <div class="brand-mini"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#E8D39B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8L12 3 3 8v8l9 5 9-5V8z"></path><path d="M3 8l9 5 9-5"></path></svg>مدیریت انبار</div>
+      <div class="brand-mini"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#E8D39B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8L12 3 3 8v8l9 5 9-5V8z"></path><path d="M3 8l9 5 9-5"></path></svg>MITRA WAREHOUSE</div>
       <div class="search-wrap">
         <svg class="si" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
-        <input type="search" id="globalSearch" placeholder="جستجوی کالا، برند، سایز، SKU، فاکتور، مشتری..." aria-label="جستجوی سراسری">
+        <input type="search" id="globalSearch" placeholder="جستجوی کالا، برند، سایز و کد کالا..." aria-label="جستجوی سراسری">
       </div>
       <div class="clock-box"><div class="t" id="clock">۱۳:۳۲:۳۳</div><div class="d" id="dateLine">یکشنبه ۱۵ شهریور ۱۴۰۵</div></div>
       <div class="top-actions">
@@ -549,8 +605,8 @@ table.tbl td{ font-size:var(--fs-sm); }
           <form id="incomingForm" autocomplete="off">
             <div class="grid3">
               <div class="field"><label>نام کالا <span class="req">*</span></label><input class="input" name="name" required=""><div class="err-msg"></div></div>
-              <div class="field"><label>برند <span class="req">*</span></label><input class="input" name="brand" required=""><div class="err-msg"></div></div>
-              <div class="field"><label>سایز <span class="req">*</span></label><input class="input" name="size" required=""><div class="err-msg"></div></div>
+              <div class="field"><label>برند <span class="req">*</span></label><select class="select" name="brand" required><option value="">انتخاب برند...</option><option>میترا</option><option>خوشخواب</option><option>دکتر بیست</option><option>بهخواب</option><option>رویا</option><option>دنیز</option><option>توس</option><option>ماکسیمم</option><option>متفرقه</option></select><div class="err-msg"></div></div>
+              <div class="field"><label>سایز <span class="req">*</span></label><select class="select" name="size" required><option value="">انتخاب سایز...</option><option>80*180</option><option>90*200</option><option>100*200</option><option>120*200</option><option>140*200</option><option>160*200</option><option>180*200</option><option>200*200</option></select><div class="err-msg"></div></div>
             </div>
             <div class="grid3">
               <div class="field"><label>تعداد <span class="req">*</span></label><input class="input" name="quantity" type="number" min="1" step="1" required=""><div class="err-msg"></div></div>
@@ -571,10 +627,6 @@ table.tbl td{ font-size:var(--fs-sm); }
         <div class="page-head"><div><h1 class="page-title">خروج کالا</h1><div class="page-sub">ثبت خروج کالا از انبار</div></div></div>
         <div class="card glass" style="max-width:680px">
           <form id="outgoingForm" autocomplete="off">
-            <div class="grid2">
-              <div class="field"><label>نام مشتری <span class="req">*</span></label><input class="input" name="customerName" required=""><div class="err-msg"></div></div>
-              <div class="field"><label>شماره فاکتور <span class="req">*</span></label><input class="input" name="invoiceNumber" required=""><div class="err-msg"></div></div>
-            </div>
             <div class="field"><label>کالا <span class="req">*</span></label><select class="select" name="productId" required="" id="outProductSel"><option value="">انتخاب کالا...</option><option value="mtpmqfat-neoa9p" data-qty="1">10 هزار - بهخواب - 180*200 (موجودی: ۱)</option><option value="mtpmrzki-es29o2" data-qty="1">10 هزار - بهخواب - 140*200 (موجودی: ۱)</option><option value="mtpmsjml-yc5yj1" data-qty="1">6 هزار - بهخواب - 140*200 (موجودی: ۱)</option><option value="mtpmx5vu-cwheuf" data-qty="1">6 هزار - بهخواب - 180*200 (موجودی: ۱)</option><option value="mtpmvk41-lk4lvh" data-qty="1">اسلیپ گلد - ماکسیمم - 180*200 (موجودی: ۱)</option><option value="mtpmxrei-b223qu" data-qty="3">الای هوم - دکتر بیست - 160 (موجودی: ۳)</option><option value="mtpmv9cu-qb4wp4" data-qty="1">التراپدیک مترس - ماکسیمم - 180*200 (موجودی: ۱)</option><option value="mtpmud3i-f1ixhb" data-qty="1">بونل کامفورت - دکتر بیست - 160*200 (موجودی: ۱)</option><option value="mtpmuvtu-dlxxx2" data-qty="1">بونل کامفورت - دکتر بیست - 180*200 (موجودی: ۱)</option><option value="mtpmtxtq-seauq1" data-qty="1">پردیس - میترا - 160*200 (موجودی: ۱)</option><option value="mtpmswkz-pyhmz0" data-qty="3">پرناز - میترا - 140*200 (موجودی: ۳)</option><option value="mtpmw7qc-zpmvea" data-qty="1">پرناز - میترا - 160*200 (موجودی: ۱)</option><option value="mtpmumiy-z5gr05" data-qty="1">پرواز - میترا - 140*200 (موجودی: ۱)</option><option value="mtpmwlx3-q6ga04" data-qty="2">پرین - میرا - 200*200 (موجودی: ۲)</option><option value="mtpmrmrz-u94wps" data-qty="1">سوپر - بهخواب - 160*200 (موجودی: ۱)</option><option value="mtpmxel8-4dujp7" data-qty="1">سوپر - بهخواب - 180*200 (موجودی: ۱)</option><option value="mtpmvy15-y2ik7p" data-qty="1">عمارت - متفرقه - 180*200 (موجودی: ۱)</option></select><div class="err-msg"></div><div id="outStockInfo" class="hint" style="margin-top:6px"></div></div>
             <div class="grid2">
               <div class="field"><label>تعداد <span class="req">*</span></label><input class="input" name="quantity" type="number" min="1" step="1" required=""><div class="err-msg"></div></div>
@@ -655,6 +707,38 @@ table.tbl td{ font-size:var(--fs-sm); }
         </div>
       </section>
 
+      <!-- SHARED PHOTO GALLERY -->
+      <section class="view" id="view-photos">
+        <div class="page-head"><div><h1 class="page-title">تصاویر انبار</h1><div class="page-sub">ثبت و مشاهده عکس‌های مشترک کالاها و ایرادهای احتمالی</div></div></div>
+        <div class="card glass photo-upload-card">
+          <div class="section-kicker">فضای اشتراکی تیم</div>
+          <h2 class="section-title">بارگذاری تصویر جدید</h2>
+          <p class="muted">تصویر تشک، آسیب‌دیدگی یا نکته‌ای که باید همکاران ببینند را اینجا ثبت کنید. هر تصویر پس از ۳۰ ساعت از گالری حذف می‌شود.</p>
+          <div class="field"><label for="photoFile">انتخاب عکس</label><input class="input" type="file" id="photoFile" accept="image/*"></div>
+          <div class="field"><label for="photoCaption">توضیحات تصویر</label><input class="input" id="photoCaption" maxlength="180" placeholder="برای مثال: پارگی گوشه تشک مدل ..."></div>
+          <div class="form-row-end"><button class="btn btn-primary" id="photoUploadBtn" type="button">بارگذاری تصویر</button></div>
+          <div class="hint" id="photoUploadStatus" role="status"></div>
+        </div>
+        <div class="photo-gallery-head"><div><h2 class="section-title">گالری تصاویر</h2><div class="muted">تصاویر ثبت‌شده توسط همه کاربران</div></div><button class="btn btn-ghost" id="refreshPhotosBtn" type="button">به‌روزرسانی</button></div>
+        <div id="photoGallery" class="photo-gallery"><div class="empty"><div class="t">در حال دریافت تصاویر...</div></div></div>
+      </section>
+
+      <!-- SUPPORT CENTER -->
+      <section class="view" id="view-support">
+        <div class="page-head"><div><h1 class="page-title">مرکز پشتیبانی</h1><div class="page-sub">ارتباط مستقیم برای راهنمایی و پیگیری مشکلات سامانه</div></div></div>
+        <div class="support-layout">
+          <div class="card glass support-card">
+            <div class="support-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.7 7.4L3 21l2.1-5.3A8.5 8.5 0 1 1 21 11.5Z"></path><path d="M8 12h8M8 8.5h5"></path></svg></div>
+            <div class="section-kicker">MITRA WAREHOUSE</div><h2 class="section-title">همیشه در دسترس شما</h2>
+            <p class="muted">برای راهنمایی، گزارش خطا یا پیگیری مسائل مربوط به مدیریت انبار با مسئول پشتیبانی تماس بگیرید.</p>
+            <div class="support-info"><span>مسئول پشتیبانی</span><strong>مهندس حسین نجفی</strong></div>
+            <div class="support-info"><span>شماره تماس</span><strong dir="ltr">09045455385</strong></div>
+            <a class="btn btn-primary support-call" href="tel:09045455385">تماس با پشتیبانی</a>
+          </div>
+          <div class="card glass support-note"><h3>چه مواردی را گزارش کنیم؟</h3><ul><li>مشکل در ورود یا خروج کالا</li><li>مغایرت تعداد موجودی</li><li>خطا در همگام‌سازی اطلاعات</li><li>مشکل در بارگذاری یا مشاهده تصاویر</li></ul><p class="muted">هنگام تماس، نام بخش و متن خطایی که مشاهده می‌کنید را اعلام کنید تا سریع‌تر راهنمایی شوید.</p></div>
+        </div>
+      </section>
+
       <!-- BACKUP -->
       <section class="view" id="view-backup">
         <div class="page-head"><div><h1 class="page-title">بکاپ و ریکاوری</h1><div class="page-sub">پشتیبان‌گیری و بازیابی داده‌ها</div></div></div>
@@ -703,6 +787,7 @@ table.tbl td{ font-size:var(--fs-sm); }
         </div>
       </section>
     </main>
+    <button type="button" class="floating-support" id="floatingSupportBtn" aria-label="رفتن به پشتیبانی"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.7 7.4L3 21l2.1-5.3A8.5 8.5 0 1 1 21 11.5Z"></path><path d="M8 12h8M8 8.5h5"></path></svg><span>پشتیبانی</span></button>
   </div>
 </div>
 
@@ -817,83 +902,26 @@ async function openDB(){
     showAuthGate("");
     await new Promise(function(resolve){
       var form=document.getElementById("authForm");
-      var submit=document.getElementById("authSubmit");
-      var errorBox=document.getElementById("authError");
-      var isSignup=false;
-      var switchBtn=document.getElementById("authSwitch");
-      var switchText=document.getElementById("authSwitchText");
-      var nameField=document.getElementById("authNameField");
-      var nameInput=document.getElementById("authName");
-      var title=document.getElementById("authTitle");
-      var description=document.getElementById("authDescription");
-      var password=document.getElementById("authPassword");
-      function setMode(signup){
-        isSignup=signup;
-        errorBox.textContent="";
-        nameField.style.display=signup?"block":"none";
-        nameInput.required=signup;
-        password.autocomplete=signup?"new-password":"current-password";
-        title.textContent=signup?"ساخت حساب کاربری":"ورود به انبار میترا";
-        description.textContent=signup?"برای ساخت حساب، نام، ایمیل و رمز عبور را وارد کنید.":"برای ورود، ایمیل و رمز عبور خود را وارد کنید.";
-        submit.textContent=signup?"ثبت‌نام":"ورود";
-        switchText.textContent=signup?"قبلاً حساب ساخته‌ای؟":"حساب نداری؟";
-        switchBtn.textContent=signup?"وارد شو":"ثبت‌نام کن";
-      }
-      switchBtn.onclick=function(){setMode(!isSignup);};
       var handler=async function(e){
         e.preventDefault();
-        submit.disabled=true; submit.textContent=isSignup?"در حال ساخت حساب…":"در حال ورود…";
-        errorBox.style.color="#f87171"; errorBox.textContent="";
-        var email=document.getElementById("authEmail").value.trim();
-        var pass=password.value;
-        var result;
-        if(isSignup){
-          var displayName=nameInput.value.trim();
-          if(displayName.length<2){
-            errorBox.textContent="نام و نام خانوادگی را کامل وارد کن.";
-            submit.disabled=false; submit.textContent="ثبت‌نام"; return;
-          }
-          if(pass.length<8){
-            errorBox.textContent="رمز عبور باید حداقل ۸ کاراکتر باشد.";
-            submit.disabled=false; submit.textContent="ثبت‌نام"; return;
-          }
-          result=await sb.auth.signUp({
-            email:email,password:pass,
-            options:{data:{display_name:displayName}}
-          });
-          if(result.error){
-            errorBox.textContent="ثبت‌نام انجام نشد؛ ایمیل را بررسی کن یا اگر قبلاً حساب ساخته‌ای وارد شو.";
-            submit.disabled=false; submit.textContent="ثبت‌نام"; return;
-          }
-          if(result.data&&result.data.session){
-            session=result.data.session;
-            form.removeEventListener("submit",handler);
-            hideAuthGate(); resolve(); return;
-          }
-          errorBox.style.color="var(--ok)";
-          errorBox.textContent="حساب ساخته شد. برای فعال‌سازی، ایمیل تأیید ارسال‌شده را بررسی کن؛ سپس وارد شو.";
-          setMode(false);
-          submit.disabled=false;
-          return;
-        }else{
-          result=await sb.auth.signInWithPassword({email:email,password:pass});
-          if(result.error){
-            errorBox.textContent="ورود ناموفق بود؛ ایمیل و رمز عبور را بررسی کن.";
-            submit.disabled=false; submit.textContent="ورود"; return;
-          }
-          session=result.data.session;
-          form.removeEventListener("submit",handler);
-          hideAuthGate(); resolve(); return;
-        }
+        var btn=document.getElementById("authSubmit");
+        var err=document.getElementById("authError");
+        btn.disabled=true; btn.textContent="در حال ورود…"; err.textContent="";
+        var result=await sb.auth.signInWithPassword({
+          email:document.getElementById("authEmail").value.trim(),
+          password:document.getElementById("authPassword").value
+        });
+        if(result.error){ err.textContent="ورود ناموفق بود؛ ایمیل و رمز عبور را بررسی کن."; btn.disabled=false; btn.textContent="ورود"; return; }
+        form.removeEventListener("submit",handler);
+        hideAuthGate(); resolve();
       };
       form.addEventListener("submit",handler);
-      setMode(false);
     });
     session=(await sb.auth.getSession()).data.session;
   }
   currentUser=session.user;
   var profileResult=await sb.from("profiles").select("display_name").eq("id",currentUser.id).maybeSingle();
-  currentProfile=profileResult.data||{display_name:(currentUser.user_metadata&&currentUser.user_metadata.display_name)||(currentUser.email||"کاربر").split("@")[0]};
+  currentProfile=profileResult.data||{display_name:(currentUser.email||"کاربر").split("@")[0]};
   var userLabel=document.getElementById("currentUserLabel");
   if(userLabel) userLabel.textContent=currentProfile.display_name;
   document.getElementById("logoutBtn").onclick=async function(){
@@ -909,6 +937,9 @@ async function openDB(){
         renderView(currentView);
         if(currentView==="outgoing") renderOutgoingSelect();
       }
+    })
+    .on("postgres_changes",{event:"*",schema:"public",table:"warehouse_photos"},function(){
+      if(currentView==="photos" && document.visibilityState==="visible") renderPhotos();
     }).subscribe();
   return Promise.resolve();
 }
@@ -1009,6 +1040,7 @@ function renderView(name){
   else if(name==="recycle") renderRecycle();
   else if(name==="backup") renderDbInfo();
   else if(name==="settings") renderSettings();
+  else if(name==="photos") renderPhotos();
 }
 document.querySelectorAll("[data-view]").forEach(function(btn){ btn.addEventListener("click",function(){ showView(btn.dataset.view); }); });
 document.querySelectorAll(".quick-btn").forEach(function(btn){ btn.addEventListener("click",function(){ showView(btn.dataset.go); }); });
@@ -1173,9 +1205,16 @@ function renderPager(elId,page,total,fn){
   html+='<button '+(page>=total?'disabled':'')+' data-p="'+(page+1)+'">›</button>';
   el.innerHTML=html; el.querySelectorAll("button[data-p]").forEach(function(b){b.addEventListener("click",function(){fn(parseInt(b.dataset.p,10));});});
 }
+function optionSelectHtml(name,label,options,value){
+  var opts=options.slice();
+  if(value && opts.indexOf(value)<0) opts.unshift(value);
+  return '<div class="field"><label>'+label+' <span class="req">*</span></label><select class="select" name="'+name+'" required><option value="">انتخاب '+label+'...</option>'+opts.map(function(v){return '<option value="'+escapeHtml(v)+'" '+(v===value?'selected':'')+'>'+escapeHtml(v)+'</option>';}).join('')+'</select></div>';
+}
+var MITRA_BRANDS=["میترا","خوشخواب","دکتر بیست","بهخواب","رویا","دنیز","توس","ماکسیمم","متفرقه"];
+var MITRA_SIZES=["80*180","90*200","100*200","120*200","140*200","160*200","180*200","200*200"];
 function openProductModal(product){
   var p=product||{name:"",brand:"",size:"",sku:"",quantity:"",minimumStock:"",notes:""};
-  showModal('<div class="modal-head"><h2 class="modal-title">'+(product?"ویرایش کالا":"کالای جدید")+'</h2><button class="icon-btn" onclick="app.closeModal()"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div><form id="productForm"><div class="grid3"><div class="field"><label>نام کالا <span class="req">*</span></label><input class="input" name="name" value="'+escapeHtml(p.name)+'" required autofocus></div><div class="field"><label>برند <span class="req">*</span></label><input class="input" name="brand" value="'+escapeHtml(p.brand)+'" required></div><div class="field"><label>سایز <span class="req">*</span></label><input class="input" name="size" value="'+escapeHtml(p.size)+'" required></div></div><div class="grid3"><div class="field"><label>موجودی <span class="req">*</span></label><input class="input" name="quantity" type="number" min="0" value="'+(p.quantity!=null?p.quantity:"")+'" required></div><div class="field"><label>حداقل موجودی</label><input class="input" name="minimumStock" type="number" min="0" value="'+(p.minimumStock||"")+'"></div><div class="field"><label>SKU</label><input class="input" name="sku" value="'+escapeHtml(p.sku||"")+'"></div></div><div class="field"><label>یادداشت</label><textarea class="textarea" name="notes">'+escapeHtml(p.notes||"")+'</textarea></div><div class="modal-foot"><button type="submit" class="btn btn-primary">ذخیره</button><button type="button" class="btn btn-ghost" onclick="app.closeModal()">لغو</button></div></form>');
+  showModal('<div class="modal-head"><h2 class="modal-title">'+(product?"ویرایش کالا":"کالای جدید")+'</h2><button class="icon-btn" onclick="app.closeModal()"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div><form id="productForm"><div class="grid3"><div class="field"><label>نام کالا <span class="req">*</span></label><input class="input" name="name" value="'+escapeHtml(p.name)+'" required autofocus></div>'+optionSelectHtml("brand","برند",MITRA_BRANDS,p.brand)+' '+optionSelectHtml("size","سایز",MITRA_SIZES,p.size)+'</div><div class="grid3"><div class="field"><label>موجودی <span class="req">*</span></label><input class="input" name="quantity" type="number" min="0" value="'+(p.quantity!=null?p.quantity:"")+'" required></div><div class="field"><label>حداقل موجودی</label><input class="input" name="minimumStock" type="number" min="0" value="'+(p.minimumStock||"")+'"></div><div class="field"><label>SKU</label><input class="input" name="sku" value="'+escapeHtml(p.sku||"")+'"></div></div><div class="field"><label>یادداشت</label><textarea class="textarea" name="notes">'+escapeHtml(p.notes||"")+'</textarea></div><div class="modal-foot"><button type="submit" class="btn btn-primary">ذخیره</button><button type="button" class="btn btn-ghost" onclick="app.closeModal()">لغو</button></div></form>');
   document.getElementById("productForm").addEventListener("submit",function(e){
     e.preventDefault(); var f=e.target;
     var name=f.name.value.trim(),brand=f.brand.value.trim(),size=f.size.value.trim();
@@ -1236,7 +1275,7 @@ async function renderRecent(type){
   if(list.length===0){ el.innerHTML='<div class="muted" style="font-size:var(--fs-sm);padding:8px 0">هنوز عملیاتی ثبت نشده است.</div>'; return; }
   el.innerHTML=list.map(function(t){
     var tag=t.type==="incoming"?'<span class="tag in">ورود</span>':'<span class="tag out">خروج</span>';
-    var extra=t.type==="outgoing"?'<div class="hint">'+escapeHtml(t.customerName||"")+(t.invoiceNumber?" • فاکتور "+escapeHtml(t.invoiceNumber):"")+'</div>' :"";
+    var extra="";
     return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)"><div><div style="font-weight:600">'+escapeHtml(t.productName)+' '+escapeHtml(t.brand)+' <span class="muted">'+escapeHtml(t.size)+'</span></div>'+extra+'</div><div style="text-align:left">'+tag+' <b style="margin-right:6px">'+toFa(t.quantity)+'</b><div class="hint">'+formatJalali(t.timestamp,true)+'</div></div></div>';
   }).join("");
 }
@@ -1254,26 +1293,20 @@ document.getElementById("outProductSel").addEventListener("change",function(){
 });
 document.getElementById("outgoingForm").addEventListener("submit",async function(e){
   e.preventDefault(); var f=e.target;
-  var customerName=f.customerName.value.trim(),invoiceNumber=f.invoiceNumber.value.trim();
   var productId=f.productId.value,quantity=clamp(toEn(f.quantity.value)),notes=f.notes.value.trim();
   clearFormErrors(f);
-  if(!customerName){showFieldError(f.customerName,"نام مشتری الزامی است.");return;}
-  if(!invoiceNumber){showFieldError(f.invoiceNumber,"شماره فاکتور الزامی است.");return;}
-  if(!productId){showFieldError(f.productId,"انتخاب کالا الزامی است.");return;}
-  if(quantity<=0){showFieldError(f.quantity,"تعداد باید بزرگتر از صفر باشد.");return;}
+  if(!productId){showFieldError(f.productId,"لطفاً کالا را انتخاب کنید.");return;}
+  if(quantity<=0){showFieldError(f.quantity,"تعداد خروج باید بیشتر از صفر باشد.");return;}
   var product=await dbGet("products",productId);
-  if(!product){toast("کالا یافت نشد.","err");return;}
+  if(!product){toast("کالای انتخاب‌شده پیدا نشد.","err");return;}
   if(quantity>product.quantity){showFieldError(f.quantity,"موجودی کافی نیست. موجودی فعلی: "+toFa(product.quantity));toast("موجودی کافی نیست.","err");return;}
-  var txns=await dbGetAll("transactions");
-  var dup=txns.some(function(t){return t.type==="outgoing"&&t.invoiceNumber&&t.invoiceNumber.trim().toLowerCase()===invoiceNumber.toLowerCase();});
-  if(dup){ confirmModal("شماره فاکتور تکراری","این شماره فاکتور قبلاً ثبت شده است.<br>آیا مطمئن هستید که می‌خواهید ادامه دهید؟","ثبت به هر حال",async function(){ doOutgoing(product,customerName,invoiceNumber,quantity,notes,f); },{danger:true}); }
-  else { doOutgoing(product,customerName,invoiceNumber,quantity,notes,f); }
+  await doOutgoing(product,quantity,notes,f);
 });
-async function doOutgoing(product,customerName,invoiceNumber,quantity,notes,f){
+async function doOutgoing(product,quantity,notes,f){
   product.quantity-=quantity; product.updatedAt=now(); await dbPut("products",product);
-  await dbPut("transactions",{id:uid(),type:"outgoing",productId:product.id,productName:product.name,brand:product.brand,size:product.size,quantity:quantity,customerName:customerName,invoiceNumber:invoiceNumber,notes:notes,timestamp:now()});
-  await logHistory("outgoing",{productName:product.name,brand:product.brand,size:product.size,quantity:quantity,customerName:customerName,invoiceNumber:invoiceNumber});
-  toast("خروج کالا ثبت شد.","ok"); f.reset(); document.getElementById("outStockInfo").innerHTML="";
+  await dbPut("transactions",{id:uid(),type:"outgoing",productId:product.id,productName:product.name,brand:product.brand,size:product.size,quantity:quantity,customerName:"",invoiceNumber:"",notes:notes,timestamp:now()});
+  await logHistory("outgoing",{productName:product.name,brand:product.brand,size:product.size,quantity:quantity});
+  toast("خروج کالا با موفقیت ثبت شد.","ok"); f.reset(); document.getElementById("outStockInfo").innerHTML="";
   renderOutgoingSelect(); renderRecent("outgoing"); if(currentView==="dashboard") renderDashboard();
 }
 
@@ -1472,6 +1505,70 @@ document.getElementById("resetBtn").addEventListener("click",async function(){
     },{danger:true});
   },{gold:true});
 });
+
+
+/* SHARED PHOTO GALLERY */
+async function cleanupExpiredPhotos(){
+  var expired=await sb.from("warehouse_photos").select("id,storage_path").lte("expires_at",new Date().toISOString());
+  if(expired.error) throw expired.error;
+  for(var i=0;i<(expired.data||[]).length;i++){
+    var item=expired.data[i];
+    try{await sb.storage.from("warehouse-photos").remove([item.storage_path]);}catch(e){}
+    var del=await sb.from("warehouse_photos").delete().eq("id",item.id);
+    if(del.error) console.warn("حذف اطلاعات تصویر منقضی‌شده ناموفق بود",del.error);
+  }
+}
+async function renderPhotos(){
+  var gallery=document.getElementById("photoGallery"); if(!gallery||!sb) return;
+  gallery.innerHTML='<div class="empty"><div class="t">در حال دریافت تصاویر...</div></div>';
+  try{
+    await cleanupExpiredPhotos();
+    var result=await sb.from("warehouse_photos").select("*").gt("expires_at",new Date().toISOString()).order("created_at",{ascending:false});
+    if(result.error) throw result.error;
+    var rows=result.data||[];
+    if(!rows.length){gallery.innerHTML='<div class="card glass empty"><div class="t">هنوز تصویری ثبت نشده است.</div><div class="s">می‌توانید اولین تصویر را بارگذاری کنید.</div></div>';return;}
+    var html=await Promise.all(rows.map(async function(photo){
+      var signed=await sb.storage.from("warehouse-photos").createSignedUrl(photo.storage_path,3600);
+      if(signed.error) return "";
+      var remaining=Math.max(0,Math.ceil((new Date(photo.expires_at).getTime()-Date.now())/60000));
+      var remainingText=remaining>=60?toFa(Math.floor(remaining/60))+" ساعت دیگر":toFa(remaining)+" دقیقه دیگر";
+      return '<article class="photo-card"><img loading="lazy" src="'+escapeHtml(signed.data.signedUrl)+'" alt="'+escapeHtml(photo.caption||"تصویر انبار")+'"><div class="photo-card-body"><div class="photo-card-caption">'+escapeHtml(photo.caption||"بدون توضیحات")+'</div><div class="photo-card-meta"><span>'+escapeHtml(photo.uploader_name||"کاربر")+'</span><span>حذف خودکار: '+remainingText+'</span></div><div class="photo-card-actions"><button class="btn btn-danger btn-sm" type="button" data-photo-delete="'+escapeHtml(photo.id)+'">حذف تصویر</button></div></div></article>';
+    }));
+    gallery.innerHTML=html.filter(Boolean).join("")||'<div class="card glass empty"><div class="t">تصویری برای نمایش وجود ندارد.</div></div>';
+  }catch(err){console.error("Photo gallery:",err);gallery.innerHTML='<div class="card glass"><div class="t">دریافت تصاویر انجام نشد.</div><div class="hint">لطفاً یک‌بار تنظیمات فضای ذخیره‌سازی تصاویر را بررسی کنید.</div></div>';}
+}
+document.getElementById("photoUploadBtn").addEventListener("click",async function(){
+  var input=document.getElementById("photoFile"),status=document.getElementById("photoUploadStatus"),btn=this,file=input.files&&input.files[0];
+  if(!file){status.textContent="ابتدا یک تصویر انتخاب کنید.";return;}
+  if(!file.type.startsWith("image/")){status.textContent="فقط فایل تصویری قابل بارگذاری است.";return;}
+  if(file.size>10*1024*1024){status.textContent="حجم تصویر نباید بیشتر از ۱۰ مگابایت باشد.";return;}
+  btn.disabled=true;status.textContent="در حال بارگذاری تصویر...";
+  var safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_").slice(-70)||"photo.jpg";
+  var path=currentUser.id+"/"+Date.now()+"-"+safeName;
+  try{
+    var uploaded=await sb.storage.from("warehouse-photos").upload(path,file,{cacheControl:"3600",upsert:false,contentType:file.type});
+    if(uploaded.error) throw uploaded.error;
+    var expiresAt=new Date(Date.now()+30*60*60*1000).toISOString();
+    var saved=await sb.from("warehouse_photos").insert({storage_path:path,caption:document.getElementById("photoCaption").value.trim(),uploaded_by:currentUser.id,uploader_name:(currentProfile&&currentProfile.display_name)||"کاربر",expires_at:expiresAt});
+    if(saved.error){await sb.storage.from("warehouse-photos").remove([path]);throw saved.error;}
+    input.value="";document.getElementById("photoCaption").value="";status.textContent="تصویر برای همه کاربران ثبت شد.";await renderPhotos();
+  }catch(err){console.error("Photo upload:",err);status.textContent="بارگذاری ناموفق بود. دسترسی‌های جدول و فضای ذخیره‌سازی تصاویر را بررسی کنید.";}
+  finally{btn.disabled=false;}
+});
+document.getElementById("refreshPhotosBtn").addEventListener("click",renderPhotos);
+document.getElementById("photoGallery").addEventListener("click",async function(e){
+  var btn=e.target.closest("[data-photo-delete]");if(!btn)return;
+  if(!confirm("این تصویر برای همه کاربران حذف شود؟"))return;
+  btn.disabled=true;
+  try{
+    var id=btn.getAttribute("data-photo-delete"),q=await sb.from("warehouse_photos").select("storage_path").eq("id",id).single();
+    if(q.error)throw q.error;
+    var rm=await sb.storage.from("warehouse-photos").remove([q.data.storage_path]);if(rm.error)throw rm.error;
+    var del=await sb.from("warehouse_photos").delete().eq("id",id);if(del.error)throw del.error;
+    await renderPhotos();toast("تصویر حذف شد.","ok");
+  }catch(err){console.error(err);toast("حذف تصویر ناموفق بود. دسترسی‌ها را بررسی کنید.","err");btn.disabled=false;}
+});
+document.getElementById("floatingSupportBtn").addEventListener("click",function(){showView("support");});
 
 /* GLOBAL SEARCH */
 var globalSearchQuery="",searchTimer=null;
