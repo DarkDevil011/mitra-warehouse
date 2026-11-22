@@ -884,6 +884,15 @@ body.photo-view-open{overflow:hidden;touch-action:none}
   </div>
 </div>
 
+<div id="photoLightbox" class="photo-lightbox">
+  <button id="photoLightboxClose" class="photo-lightbox-close">×</button>
+  <button id="photoLightboxZoom" class="photo-lightbox-zoom">بزرگ‌نمایی</button>
+  <div class="photo-lightbox-stage">
+    <img id="photoLightboxImage" alt="نمایش تصویر">
+  </div>
+  <div id="photoLightboxCaption" class="photo-lightbox-caption"></div>
+</div>
+
 <script>
 /* ============================================================
  * WAREHOUSE PWA — Persian offline-first inventory management
@@ -893,8 +902,8 @@ body.photo-view-open{overflow:hidden;touch-action:none}
 
 var DB_NAME = "warehouseDB";
 var DB_VERSION = 1;
-var STORES = ["products","transactions","history","recycleBin","settings"];
-var APP_VERSION = "1.1.1";
+var STORES = ["products","transactions","history","recycleBin","settings","inbox","notification_settings"];
+var APP_VERSION = "1.69.85";
 var PAGE_SIZE = 20;
 var JALALI_MONTHS = ["فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"];
 var JALALI_MONTH_CHART = ["فرو","ارد","خرداد","تیر","مرداد","شهر","مهر","آبان","آذر","دی","بهمن","اسفند"];
@@ -1020,16 +1029,19 @@ async function openDB(){
   return Promise.resolve();
 }
 async function dbGetAll(store){
+  if(!sb) throw new Error("اتصال دیتابیس هنوز برقرار نشده است.");
   var q=await sb.from("warehouse_records").select("payload").eq("store_name",store);
   if(q.error) throw q.error;
   return (q.data||[]).map(function(r){return r.payload;});
 }
 async function dbGet(store,key){
+  if(!sb) throw new Error("اتصال دیتابیس هنوز برقرار نشده است.");
   var q=await sb.from("warehouse_records").select("payload").eq("store_name",store).eq("record_id",String(key)).maybeSingle();
   if(q.error) throw q.error;
   return q.data?q.data.payload:undefined;
 }
 async function dbPut(store,val){
+  if(!sb||!currentUser) throw new Error("ابتدا وارد حساب کاربری شوید.");
   var id=getRecordId(store,val);
   var q=await sb.from("warehouse_records").upsert({
     store_name:store,record_id:id,payload:val,updated_by:currentUser.id
@@ -1626,7 +1638,8 @@ async function cleanupExpiredPhotos(){
   if(expired.error) throw expired.error;
   for(var i=0;i<(expired.data||[]).length;i++){
     var item=expired.data[i];
-    try{await sb.storage.from("warehouse-photos").remove([item.storage_path]);}catch(e){}
+    var removed=await sb.storage.from("warehouse-photos").remove([item.storage_path]);
+    if(removed.error){console.warn("حذف فایل تصویر منقضی‌شده ناموفق بود",removed.error);continue;}
     var del=await sb.from("warehouse_photos").delete().eq("id",item.id);
     if(del.error) console.warn("حذف اطلاعات تصویر منقضی‌شده ناموفق بود",del.error);
   }
@@ -1651,28 +1664,58 @@ async function renderPhotos(){
   }catch(err){console.error("Photo gallery:",err);gallery.innerHTML='<div class="card glass"><div class="t">دریافت تصاویر انجام نشد.</div><div class="hint">لطفاً یک‌بار تنظیمات فضای ذخیره‌سازی تصاویر را بررسی کنید.</div></div>';}
 }
 document.getElementById("photoUploadBtn").addEventListener("click",async function(){
-  var input=document.getElementById("photoFile"),status=document.getElementById("photoUploadStatus"),btn=this,file=input.files&&input.files[0];
+  var input=document.getElementById("photoFile");
+  var status=document.getElementById("photoUploadStatus");
+  var btn=this;
+  var file=input&&input.files&&input.files[0];
+  if(!currentUser||!sb){status.textContent="اتصال برقرار نیست؛ ابتدا دوباره وارد حساب شوید.";return;}
   if(!file){status.textContent="ابتدا یک تصویر انتخاب کنید.";return;}
-  if(!file.type.startsWith("image/")){status.textContent="فقط فایل تصویری قابل بارگذاری است.";return;}
+  var allowedTypes=["image/jpeg","image/png","image/webp","image/gif"];
+  if(allowedTypes.indexOf(file.type)===-1){status.textContent="فرمت مجاز: JPG، PNG، WEBP یا GIF.";return;}
   if(file.size>10*1024*1024){status.textContent="حجم تصویر نباید بیشتر از ۱۰ مگابایت باشد.";return;}
-  btn.disabled=true;status.textContent="در حال بارگذاری تصویر...";
-  var safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_").slice(-70)||"photo.jpg";
+  btn.disabled=true;
+  status.textContent="در حال بارگذاری تصویر...";
+  var safeName=(file.name||"photo.jpg").replace(/[^a-zA-Z0-9._-]/g,"_").slice(-70)||"photo.jpg";
   var path=currentUser.id+"/"+Date.now()+"-"+safeName;
+  var fileUploaded=false;
   try{
-    var uploaded=await sb.storage.from("warehouse-photos").upload(path,file,{cacheControl:"3600",upsert:false,contentType:file.type});
+    var uploaded=await sb.storage.from("warehouse-photos").upload(path,file,{
+      cacheControl:"3600",upsert:false,contentType:file.type
+    });
     if(uploaded.error) throw uploaded.error;
+    fileUploaded=true;
     var expiresAt=new Date(Date.now()+30*60*60*1000).toISOString();
-    var saved=await sb.from("warehouse_photos").insert({storage_path:path,caption:document.getElementById("photoCaption").value.trim(),uploaded_by:currentUser.id,uploader_name:(currentProfile&&currentProfile.display_name)||"کاربر",expires_at:expiresAt});
-    if(saved.error){await sb.storage.from("warehouse-photos").remove([path]);throw saved.error;}
-    input.value="";document.getElementById("photoCaption").value="";status.textContent="تصویر برای همه کاربران ثبت شد.";await renderPhotos();
-  }catch(err){console.error("Photo upload:",err);status.textContent="بارگذاری ناموفق بود. دسترسی‌های جدول و فضای ذخیره‌سازی تصاویر را بررسی کنید.";}
-  finally{btn.disabled=false;}
+    var saved=await sb.from("warehouse_photos").insert({
+      storage_path:path,
+      caption:(document.getElementById("photoCaption").value||"").trim(),
+      uploaded_by:currentUser.id,
+      uploader_name:(currentProfile&&currentProfile.display_name)||"کاربر",
+      expires_at:expiresAt
+    });
+    if(saved.error) throw saved.error;
+    input.value="";
+    document.getElementById("photoCaption").value="";
+    status.textContent="تصویر با موفقیت برای همه کاربران ثبت شد.";
+    await renderPhotos();
+  }catch(err){
+    console.error("Photo upload failed:",err);
+    if(fileUploaded){
+      var cleanup=await sb.storage.from("warehouse-photos").remove([path]);
+      if(cleanup.error) console.error("Uploaded file cleanup failed:",cleanup.error);
+    }
+    var code=err&&err.code?" ("+err.code+")":"";
+    var message=err&&err.message?String(err.message):"خطای نامشخص";
+    status.textContent="بارگذاری ناموفق بود: "+message+code;
+  }finally{
+    btn.disabled=false;
+  }
 });
 document.getElementById("refreshPhotosBtn").addEventListener("click",renderPhotos);
 
 var photoLightbox=document.getElementById("photoLightbox");
 var photoLightboxImage=document.getElementById("photoLightboxImage");
 var photoLightboxZoom=document.getElementById("photoLightboxZoom");
+if(!photoLightbox||!photoLightboxImage||!photoLightboxZoom) throw new Error("ساختار نمایش تمام‌صفحه تصویر در صفحه وجود ندارد.");
 function closePhotoLightbox(){
   photoLightbox.classList.remove("show");
   photoLightboxImage.classList.remove("zoomed");
@@ -1841,12 +1884,4 @@ openDB().then(async function(){
 })();
 </script>
 
-<div id="photoLightbox" class="photo-lightbox">
-  <button id="photoLightboxClose" class="photo-lightbox-close">×</button>
-  <button id="photoLightboxZoom" class="photo-lightbox-zoom">بزرگ‌نمایی</button>
-  <div class="photo-lightbox-stage">
-    <img id="photoLightboxImage" alt="نمایش تصویر">
-  </div>
-  <div id="photoLightboxCaption" class="photo-lightbox-caption"></div>
-</div>
 </body></html>
