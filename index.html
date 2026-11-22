@@ -498,34 +498,36 @@ body{background:radial-gradient(900px 650px at 95% -5%,rgba(167,139,250,.22),tra
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 body.perf .sidebar,body.perf .topbar,body.perf .bottom-nav,body.perf .card.glass,body.perf .photo-card,body.perf .inbox-item{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 
-  .photo-card img{cursor:zoom-in}
-.photo-lightbox{
-  position:fixed;inset:0;z-index:9999;display:none;
-  align-items:center;justify-content:center;flex-direction:column;
-  padding:60px 12px 20px;background:rgba(0,0,0,.96);
-}
+/* Responsive photo viewer: iPhone, iPad and desktop */
+.photo-card img{cursor:zoom-in;-webkit-user-drag:none}
+.photo-lightbox{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:calc(58px + env(safe-area-inset-top)) 10px calc(16px + env(safe-area-inset-bottom));width:100vw;height:100vh;height:100dvh;background:rgba(0,0,0,.97);overscroll-behavior:contain}
 .photo-lightbox.show{display:flex}
-.photo-lightbox-stage{
-  width:100%;height:calc(100% - 45px);
-  display:flex;align-items:center;justify-content:center;overflow:auto;
+.photo-lightbox-stage{width:100%;height:calc(100% - 42px);min-height:0;display:flex;align-items:center;justify-content:center;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom}
+.photo-lightbox-stage img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:8px;cursor:zoom-in;user-select:none;-webkit-user-select:none;-webkit-user-drag:none}
+.photo-lightbox-stage img.zoomed{max-width:none;max-height:none;width:180%;height:auto;object-fit:contain;cursor:zoom-out}
+.photo-lightbox-close,.photo-lightbox-zoom{position:absolute;top:calc(10px + env(safe-area-inset-top));height:44px;min-width:44px;padding:0 14px;border:1px solid rgba(255,255,255,.28);border-radius:14px;background:rgba(35,30,52,.94);color:white;font:inherit;cursor:pointer;z-index:2}
+.photo-lightbox-close{right:12px;font-size:28px;line-height:1}
+.photo-lightbox-zoom{left:12px;font-size:13px}
+.photo-lightbox-caption{color:white;text-align:center;margin-top:2px;max-width:92%;font-size:13px;overflow-wrap:anywhere}
+body.photo-view-open{overflow:hidden;touch-action:none}
+.manual-refresh-btn{position:fixed;z-index:180;right:14px;bottom:calc(82px + env(safe-area-inset-bottom));width:42px;height:42px;border:1px solid rgba(255,255,255,.22);border-radius:50%;display:grid;place-items:center;background:rgba(35,30,52,.94);color:#fff;box-shadow:0 6px 22px rgba(0,0,0,.35);cursor:pointer}
+.manual-refresh-btn svg{width:19px;height:19px}
+.manual-refresh-btn:active{transform:scale(.94)}
+.update-required-overlay{position:fixed;inset:0;z-index:10050;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(4,5,13,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.update-required-overlay.show{display:flex}
+.update-required-card{width:min(100%,390px);padding:26px 22px;text-align:center;border:1px solid rgba(255,255,255,.18);border-radius:24px;background:linear-gradient(145deg,#241b3a,#111827);box-shadow:0 24px 80px rgba(0,0,0,.5)}
+.update-required-icon{width:58px;height:58px;margin:0 auto 14px;border-radius:18px;display:grid;place-items:center;background:rgba(124,58,237,.2);color:#c4b5fd;font-size:27px}
+.update-required-card h2{font-size:19px;margin:0 0 8px}
+.update-required-card p{font-size:13px;line-height:2;color:#d2cde0;margin:0 0 18px}
+.update-required-card .btn{width:100%;min-height:48px}
+.update-required-card .btn:disabled{opacity:.7;cursor:wait}
+@media(max-width:560px){
+  .photo-lightbox{padding-left:6px;padding-right:6px}
+  .photo-lightbox-stage{height:calc(100% - 48px)}
+  .photo-lightbox-stage img{max-width:100%;max-height:100%}
+  .photo-lightbox-stage img.zoomed{width:190%}
+  .manual-refresh-btn{right:12px;bottom:calc(78px + env(safe-area-inset-bottom))}
 }
-.photo-lightbox-stage img{
-  max-width:100%;max-height:100%;width:auto;height:auto;
-  object-fit:contain;border-radius:8px;cursor:zoom-in;
-}
-.photo-lightbox-stage img.zoomed{
-  max-width:none;max-height:none;transform:scale(1.8);
-  cursor:zoom-out;
-}
-.photo-lightbox-close,.photo-lightbox-zoom{
-  position:absolute;top:12px;height:44px;padding:0 14px;
-  border:1px solid #777;border-radius:12px;
-  background:#292435;color:white;font:inherit;cursor:pointer;
-}
-.photo-lightbox-close{right:12px;font-size:28px}
-.photo-lightbox-zoom{left:12px}
-.photo-lightbox-caption{color:white;text-align:center;margin-top:10px}
-body.photo-view-open{overflow:hidden}
 </style>
   <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -870,10 +872,15 @@ body.photo-view-open{overflow:hidden}
 
 <div class="modal-overlay" id="modalOverlay"><div class="modal glass" id="modalBox" role="dialog" aria-modal="true"><div class="modal-head"><h2 class="modal-title">حذف دائمی</h2></div><div class="modal-body">این کالا برای همیشه حذف می‌شود و قابل بازیابی نیست.<br><br>«10 هزار بهخواب 180*200»</div><div class="modal-foot"><button class="btn btn-danger" id="cmConfirm">حذف دائمی</button><button class="btn btn-ghost" id="cmCancel">لغو</button></div></div></div>
 <div class="toast-stack" id="toastStack"></div>
-<div id="swUpdateToast" style="position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:210;display:none;background:rgba(23,16,36,.97);border:1px solid var(--glass-brd);border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);max-width:90vw">
-  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
-    <span style="font-size:var(--fs-sm);font-weight:700">نسخه جدید برنامه آماده است.</span>
-    <button class="btn btn-primary btn-sm" id="swUpdateBtn">به‌روزرسانی</button>
+<button id="manualRefreshBtn" class="manual-refresh-btn" type="button" aria-label="بروزرسانی برنامه" title="بروزرسانی برنامه">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7v5h-5"></path><path d="M4 17v-5h5"></path><path d="M5.6 9A7 7 0 0 1 17.5 6L20 12M4 12l2.5 6A7 7 0 0 0 18.4 15"></path></svg>
+</button>
+<div id="swUpdateToast" class="update-required-overlay" role="dialog" aria-modal="true" aria-labelledby="updateRequiredTitle">
+  <div class="update-required-card">
+    <div class="update-required-icon">↻</div>
+    <h2 id="updateRequiredTitle">نسخه جدید آماده است</h2>
+    <p id="updateRequiredText">برای ادامه استفاده از سامانه، لطفاً برنامه را به‌روزرسانی کنید.</p>
+    <button class="btn btn-primary" id="swUpdateBtn" type="button">تأیید و بروزرسانی</button>
   </div>
 </div>
 
@@ -887,7 +894,7 @@ body.photo-view-open{overflow:hidden}
 var DB_NAME = "warehouseDB";
 var DB_VERSION = 1;
 var STORES = ["products","transactions","history","recycleBin","settings"];
-var APP_VERSION = "1.1.0";
+var APP_VERSION = "1.1.1";
 var PAGE_SIZE = 20;
 var JALALI_MONTHS = ["فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"];
 var JALALI_MONTH_CHART = ["فرو","ارد","خرداد","تیر","مرداد","شهر","مهر","آبان","آذر","دی","بهمن","اسفند"];
@@ -1665,37 +1672,26 @@ document.getElementById("refreshPhotosBtn").addEventListener("click",renderPhoto
 
 var photoLightbox=document.getElementById("photoLightbox");
 var photoLightboxImage=document.getElementById("photoLightboxImage");
-
+var photoLightboxZoom=document.getElementById("photoLightboxZoom");
 function closePhotoLightbox(){
   photoLightbox.classList.remove("show");
   photoLightboxImage.classList.remove("zoomed");
+  photoLightboxZoom.textContent="بزرگ‌نمایی";
+  photoLightboxImage.removeAttribute("src");
   document.body.classList.remove("photo-view-open");
 }
-
-document.getElementById("photoLightboxClose").onclick=closePhotoLightbox;
-
-document.getElementById("photoLightboxZoom").onclick=function(){
-  photoLightboxImage.classList.toggle("zoomed");
-  this.textContent=photoLightboxImage.classList.contains("zoomed")
-    ?"کوچک‌نمایی":"بزرگ‌نمایی";
-};
-
-photoLightboxImage.onclick=function(){
-  this.classList.toggle("zoomed");
-};
-
-photoLightbox.onclick=function(e){
-  if(e.target===photoLightbox) closePhotoLightbox();
-};
-
-document.addEventListener("keydown",function(e){
-  if(e.key==="Escape") closePhotoLightbox();
-});
-
+function togglePhotoZoom(){
+  var zoomed=photoLightboxImage.classList.toggle("zoomed");
+  photoLightboxZoom.textContent=zoomed?"کوچک‌نمایی":"بزرگ‌نمایی";
+}
+document.getElementById("photoLightboxClose").addEventListener("click",closePhotoLightbox);
+photoLightboxZoom.addEventListener("click",togglePhotoZoom);
+photoLightboxImage.addEventListener("click",togglePhotoZoom);
+photoLightbox.addEventListener("click",function(e){if(e.target===photoLightbox)closePhotoLightbox();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&photoLightbox.classList.contains("show"))closePhotoLightbox();});
 document.getElementById("photoGallery").addEventListener("click",function(e){
   var img=e.target.closest(".photo-card img");
   if(!img)return;
-
   photoLightboxImage.src=img.currentSrc||img.src;
   document.getElementById("photoLightboxCaption").textContent=img.alt||"";
   photoLightbox.classList.add("show");
@@ -1723,22 +1719,111 @@ document.getElementById("globalSearch").addEventListener("input",function(){
   searchTimer=setTimeout(function(){ globalSearchQuery=q; if(q){ if(currentView!=="inventory") showView("inventory"); else renderInventory(); } else { renderInventory(); } },220);
 });
 
-/* SERVICE WORKER */
+/* PWA UPDATE MANAGEMENT */
+var appUpdateRegistration=null;
+var pendingRemoteVersion=null;
+var updateDialogShown=false;
+var VERSION_STORAGE_KEY="mitra_warehouse_version";
+function showMandatoryUpdate(version){
+  if(version) pendingRemoteVersion=String(version);
+  if(updateDialogShown)return;
+  updateDialogShown=true;
+  document.getElementById("swUpdateToast").classList.add("show");
+  document.body.style.overflow="hidden";
+  var button=document.getElementById("swUpdateBtn");
+  button.disabled=false;
+  button.textContent="تأیید و بروزرسانی";
+}
+async function checkRemoteAppVersion(forceReload){
+  try{
+    var response=await fetch("./version.json?check="+Date.now(),{cache:"no-store"});
+    if(!response.ok)throw new Error("Version check failed");
+    var data=await response.json();
+    var remoteVersion=String(data.version||"");
+    if(!remoteVersion)return;
+    var installedVersion=localStorage.getItem(VERSION_STORAGE_KEY);
+    if(!installedVersion){
+      installedVersion=APP_VERSION;
+      localStorage.setItem(VERSION_STORAGE_KEY,installedVersion);
+    }
+    if(remoteVersion!==installedVersion){
+      showMandatoryUpdate(remoteVersion);
+      return;
+    }
+    if(forceReload)location.reload();
+  }catch(err){
+    console.warn("App version check:",err);
+    if(forceReload)location.reload();
+  }
+}
+async function applyMandatoryUpdate(){
+  var button=document.getElementById("swUpdateBtn");
+  button.disabled=true;
+  button.textContent="در حال بروزرسانی...";
+  try{
+    localStorage.setItem(VERSION_STORAGE_KEY,pendingRemoteVersion||APP_VERSION);
+    var reg=appUpdateRegistration;
+    if(reg){
+      await reg.update().catch(function(){});
+      if(reg.waiting){
+        var reloaded=false;
+        var reloadOnce=function(){if(reloaded)return;reloaded=true;location.reload();};
+        navigator.serviceWorker.addEventListener("controllerchange",reloadOnce,{once:true});
+        reg.waiting.postMessage("SKIP_WAITING");
+        setTimeout(reloadOnce,2500);
+        return;
+      }
+      if(reg.installing){
+        var installing=reg.installing;
+        await new Promise(function(resolve){
+          if(installing.state==="installed"||installing.state==="activated"){resolve();return;}
+          installing.addEventListener("statechange",function(){if(installing.state==="installed"||installing.state==="activated"||installing.state==="redundant")resolve();});
+          setTimeout(resolve,4000);
+        });
+        if(reg.waiting){
+          var done=false;
+          var reloadAfterController=function(){if(done)return;done=true;location.reload();};
+          navigator.serviceWorker.addEventListener("controllerchange",reloadAfterController,{once:true});
+          reg.waiting.postMessage("SKIP_WAITING");
+          setTimeout(reloadAfterController,2500);
+          return;
+        }
+      }
+    }
+  }catch(err){console.warn("Apply update:",err);}
+  location.reload();
+}
+document.getElementById("swUpdateBtn").addEventListener("click",applyMandatoryUpdate);
+document.getElementById("manualRefreshBtn").addEventListener("click",async function(){
+  this.disabled=true;
+  try{if(appUpdateRegistration)await appUpdateRegistration.update().catch(function(){});}catch(e){}
+  await checkRemoteAppVersion(true);
+  this.disabled=false;
+});
 if("serviceWorker" in navigator){
   window.addEventListener("load",function(){
     navigator.serviceWorker.register("./service-worker.js").then(function(reg){
-      reg.addEventListener("updatefound",function(){ var nw=reg.installing; if(!nw) return; nw.addEventListener("statechange",function(){ if(nw.state==="installed"&&navigator.serviceWorker.controller) showSwUpdateToast(reg); }); });
-      setInterval(function(){ reg.update(); },60000);
-    }).catch(function(){});
+      appUpdateRegistration=reg;
+      reg.addEventListener("updatefound",function(){
+        var worker=reg.installing;
+        if(!worker)return;
+        worker.addEventListener("statechange",function(){
+          if(worker.state==="installed"&&navigator.serviceWorker.controller)showMandatoryUpdate(APP_VERSION);
+        });
+      });
+      checkRemoteAppVersion(false);
+      setInterval(function(){
+        reg.update().catch(function(){});
+        checkRemoteAppVersion(false);
+      },60000);
+      document.addEventListener("visibilitychange",function(){
+        if(document.visibilityState==="visible"){
+          reg.update().catch(function(){});
+          checkRemoteAppVersion(false);
+        }
+      });
+    }).catch(function(err){console.warn("Service worker registration:",err);});
   });
-}
-function showSwUpdateToast(reg){
-  var t=document.getElementById("swUpdateToast"); t.style.display="block";
-  document.getElementById("swUpdateBtn").onclick=function(){
-    if(reg.waiting) reg.waiting.postMessage("SKIP_WAITING");
-    navigator.serviceWorker.addEventListener("controllerchange",function(){ location.reload(); });
-    t.style.display="none";
-  };
 }
 
 /* PUBLIC API */
