@@ -498,36 +498,77 @@ body{background:radial-gradient(900px 650px at 95% -5%,rgba(167,139,250,.22),tra
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 body.perf .sidebar,body.perf .topbar,body.perf .bottom-nav,body.perf .card.glass,body.perf .photo-card,body.perf .inbox-item{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 
-/* Responsive photo viewer: iPhone, iPad and desktop */
-.photo-card img{cursor:zoom-in;-webkit-user-drag:none}
-.photo-lightbox{position:fixed;inset:0;z-index:9999;display:none;align-items:center;justify-content:center;flex-direction:column;gap:10px;padding:calc(58px + env(safe-area-inset-top)) 10px calc(16px + env(safe-area-inset-bottom));width:100vw;height:100vh;height:100dvh;background:rgba(0,0,0,.97);overscroll-behavior:contain}
-.photo-lightbox.show{display:flex}
-.photo-lightbox-stage{width:100%;height:calc(100% - 42px);min-height:0;display:flex;align-items:center;justify-content:center;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom}
-.photo-lightbox-stage img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:8px;cursor:zoom-in;user-select:none;-webkit-user-select:none;-webkit-user-drag:none}
-.photo-lightbox-stage img.zoomed{max-width:none;max-height:none;width:180%;height:auto;object-fit:contain;cursor:zoom-out}
-.photo-lightbox-close,.photo-lightbox-zoom{position:absolute;top:calc(10px + env(safe-area-inset-top));height:44px;min-width:44px;padding:0 14px;border:1px solid rgba(255,255,255,.28);border-radius:14px;background:rgba(35,30,52,.94);color:white;font:inherit;cursor:pointer;z-index:2}
-.photo-lightbox-close{right:12px;font-size:28px;line-height:1}
-.photo-lightbox-zoom{left:12px;font-size:13px}
-.photo-lightbox-caption{color:white;text-align:center;margin-top:2px;max-width:92%;font-size:13px;overflow-wrap:anywhere}
-body.photo-view-open{overflow:hidden;touch-action:none}
-.manual-refresh-btn{position:fixed;z-index:180;right:14px;bottom:calc(82px + env(safe-area-inset-bottom));width:42px;height:42px;border:1px solid rgba(255,255,255,.22);border-radius:50%;display:grid;place-items:center;background:rgba(35,30,52,.94);color:#fff;box-shadow:0 6px 22px rgba(0,0,0,.35);cursor:pointer}
-.manual-refresh-btn svg{width:19px;height:19px}
-.manual-refresh-btn:active{transform:scale(.94)}
-.update-required-overlay{position:fixed;inset:0;z-index:10050;display:none;align-items:center;justify-content:center;padding:22px;background:rgba(4,5,13,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-.update-required-overlay.show{display:flex}
-.update-required-card{width:min(100%,390px);padding:26px 22px;text-align:center;border:1px solid rgba(255,255,255,.18);border-radius:24px;background:linear-gradient(145deg,#241b3a,#111827);box-shadow:0 24px 80px rgba(0,0,0,.5)}
-.update-required-icon{width:58px;height:58px;margin:0 auto 14px;border-radius:18px;display:grid;place-items:center;background:rgba(124,58,237,.2);color:#c4b5fd;font-size:27px}
-.update-required-card h2{font-size:19px;margin:0 0 8px}
-.update-required-card p{font-size:13px;line-height:2;color:#d2cde0;margin:0 0 18px}
-.update-required-card .btn{width:100%;min-height:48px}
-.update-required-card .btn:disabled{opacity:.7;cursor:wait}
-@media(max-width:560px){
-  .photo-lightbox{padding-left:6px;padding-right:6px}
-  .photo-lightbox-stage{height:calc(100% - 48px)}
-  .photo-lightbox-stage img{max-width:100%;max-height:100%}
-  .photo-lightbox-stage img.zoomed{width:190%}
-  .manual-refresh-btn{right:12px;bottom:calc(78px + env(safe-area-inset-bottom))}
+  .photo-card img{cursor:zoom-in}
+.photo-lightbox{
+  position:fixed;inset:0;z-index:9999;display:none;
+  align-items:center;justify-content:center;flex-direction:column;
+  padding:60px 12px 20px;background:rgba(0,0,0,.96);
 }
+.photo-lightbox.show{display:flex}
+.photo-lightbox-stage{
+  width:100%;height:calc(100% - 45px);
+  display:flex;align-items:center;justify-content:center;overflow:auto;
+}
+.photo-lightbox-stage img{
+  max-width:100%;max-height:100%;width:auto;height:auto;
+  object-fit:contain;border-radius:8px;cursor:zoom-in;
+}
+.photo-lightbox-stage img.zoomed{
+  max-width:none;max-height:none;transform:scale(1.8);
+  cursor:zoom-out;
+}
+.photo-lightbox-close,.photo-lightbox-zoom{
+  position:absolute;top:12px;height:44px;padding:0 14px;
+  border:1px solid #777;border-radius:12px;
+  background:#292435;color:white;font:inherit;cursor:pointer;
+}
+.photo-lightbox-close{right:12px;font-size:28px}
+.photo-lightbox-zoom{left:12px}
+.photo-lightbox-caption{color:white;text-align:center;margin-top:10px}
+body.photo-view-open{overflow:hidden}
+
+/* ================= VERSION 1.69.85 — FLOATING GLASS MOBILE NAV ================= */
+.app-footer{padding:22px 8px 8px;text-align:center;color:rgba(218,220,238,.48);font-size:11px;letter-spacing:.35px}
+.app-footer span{margin-right:6px;opacity:.65}
+.operations-actions{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:14px}
+.operation-symbol{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:rgba(167,139,250,.15);color:#c4b5fd;font-size:25px;font-weight:800}
+/* Lightbox uses safe viewport dimensions on iOS and Android */
+.photo-lightbox{padding:calc(58px + env(safe-area-inset-top)) 10px calc(16px + env(safe-area-inset-bottom));height:100dvh;overscroll-behavior:contain}
+.photo-lightbox-stage{height:min(100%,calc(100dvh - 125px));touch-action:pan-x pan-y pinch-zoom}
+.photo-lightbox-stage img{max-width:100%;max-height:100%;object-fit:contain;touch-action:pan-x pan-y pinch-zoom}
+.photo-lightbox-stage img.zoomed{max-width:100%;max-height:none;width:auto;height:auto;transform:none}
+@media(max-width:860px){
+  .sidebar,.scrim,.topbar .menu-btn{display:none!important}
+  .app{display:block;min-height:100dvh}
+  .content{padding-bottom:calc(122px + env(safe-area-inset-bottom))!important}
+  .bottom-nav{display:block;position:fixed;left:50%;right:auto;bottom:calc(10px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(560px,calc(100% - 24px));padding:7px;border:1px solid rgba(255,255,255,.2);border-radius:25px;background:rgba(25,22,42,.68);box-shadow:0 18px 55px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.16);backdrop-filter:blur(28px) saturate(175%);-webkit-backdrop-filter:blur(28px) saturate(175%);overflow:hidden}
+  .bottom-nav-inner{height:64px;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px}
+  .bn-item{position:relative;min-width:0;gap:3px;border:0;border-radius:17px;color:rgba(225,222,242,.65);font-size:10px;font-weight:750;min-height:54px}
+  .bn-item .ic{width:21px;height:21px}
+  .bn-item.active{color:#fff;background:rgba(167,139,250,.17);box-shadow:inset 0 0 0 1px rgba(196,181,253,.2)}
+  .bn-item-primary{color:#fff!important}
+  .bn-plus{width:32px;height:32px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(145deg,#a78bfa,#6d4bd1);box-shadow:0 5px 16px rgba(124,58,237,.4);font-size:25px;line-height:1}
+  .bn-item-primary.active .bn-plus{background:linear-gradient(145deg,#c4b5fd,#8b5cf6)}
+  .floating-support{display:none!important}
+  .operations-actions{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .app-footer{padding-bottom:12px}
+}
+@media(max-width:380px){
+  .bottom-nav{width:calc(100% - 16px);bottom:calc(7px + env(safe-area-inset-bottom));padding:5px;border-radius:21px}
+  .bottom-nav-inner{height:60px;gap:1px}
+  .bn-item{font-size:9px}
+  .bn-item .ic{width:19px;height:19px}
+  .bn-plus{width:29px;height:29px}
+  .content{padding-left:10px!important;padding-right:10px!important}
+}
+@media(prefers-reduced-transparency:reduce){.bottom-nav{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(25,22,42,.96)}}
+
+
+.mandatory-update-overlay{position:fixed;inset:0;z-index:12000;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(5,3,14,.82);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.mandatory-update-card{width:min(420px,100%);padding:26px;border-radius:24px;text-align:center;background:rgba(25,22,42,.94)!important}
+.mandatory-update-icon{width:58px;height:58px;margin:0 auto 12px;border-radius:19px;display:grid;place-items:center;background:rgba(167,139,250,.18);color:#c4b5fd;font-size:32px}
+.mandatory-update-card h2{font-size:20px;margin:0 0 8px}.mandatory-update-card p{color:var(--muted);font-size:13px;line-height:1.9;margin:0 0 20px}
+
 </style>
   <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -602,6 +643,7 @@ body.photo-view-open{overflow:hidden;touch-action:none}
       </button>
         <span class="status-pill online" id="netStatus"><span class="dot"></span><span>آنلاین</span></span>
         <button class="icon-btn" id="perfBtn" title="حالت بهینه" aria-label="حالت بهینه"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg></button>
+        <button class="icon-btn" id="manualRefreshBtn" title="بروزرسانی برنامه" aria-label="بروزرسانی برنامه"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5.6 9a7 7 0 0 1 11.6-2L20 12M4 12l2.8 5a7 7 0 0 0 11.6-2"/></svg></button>
       </div>
     </header>
 
@@ -754,7 +796,7 @@ body.photo-view-open{overflow:hidden;touch-action:none}
       <section class="view" id="view-history">
         <div class="page-head">
           <div><h1 class="page-title">تاریخچه عملیات</h1><div class="page-sub">ثبت تمامی تغییرات</div></div>
-          <div class="actions"><button class="btn btn-ghost" id="clearHistBtn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>پاک کردن تاریخچه</button></div>
+          <div class="actions"><button class="btn btn-ghost" id="clearHistBtn" title="حذف تاریخچه غیرفعال است"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>پاک کردن تاریخچه</button></div>
         </div>
         <div class="card glass">
           <div class="table-wrap"><table class="tbl"><thead><tr><th>عملیات</th><th>کالا</th><th>تعداد</th><th>مشتری</th><th>فاکتور</th><th>زمان</th><th>جزئیات</th></tr></thead><tbody id="histTbody"></tbody></table></div>
@@ -792,6 +834,22 @@ body.photo-view-open{overflow:hidden;touch-action:none}
         <div id="photoGallery" class="photo-gallery"><div class="empty"><div class="t">در حال دریافت تصاویر...</div></div></div>
       </section>
 
+      <!-- OPERATIONS HUB: mobile-friendly shortcuts to all operational areas -->
+      <section class="view" id="view-operations">
+        <div class="page-head"><div><h1 class="page-title">ثبت و مدیریت عملیات</h1><div class="page-sub">انتخاب سریع نوع عملیات یا بخش موردنظر</div></div></div>
+        <div class="quick-actions operations-actions">
+          <button class="quick-btn" data-go="incoming"><span class="operation-symbol">＋</span><span class="l">ثبت ورود کالا</span></button>
+          <button class="quick-btn" data-go="outgoing"><span class="operation-symbol">−</span><span class="l">ثبت خروج کالا</span></button>
+          <button class="quick-btn" data-go="photos"><span class="operation-symbol">▧</span><span class="l">تصاویر انبار</span></button>
+          <button class="quick-btn" data-go="inbox"><span class="operation-symbol">♧</span><span class="l">اعلان‌ها</span></button>
+          <button class="quick-btn" data-go="recycle"><span class="operation-symbol">↶</span><span class="l">سطل زباله</span></button>
+          <button class="quick-btn" data-go="backup"><span class="operation-symbol">⇩</span><span class="l">بکاپ و بازیابی</span></button>
+          <button class="quick-btn" data-go="settings"><span class="operation-symbol">⚙</span><span class="l">تنظیمات</span></button>
+          <button class="quick-btn" data-go="support"><span class="operation-symbol">?</span><span class="l">پشتیبانی</span></button>
+        </div>
+        <div class="card glass"><h2 class="section-title">یادآوری ثبت عملیات</h2><p class="muted">قبل از ثبت خروج، نام کالا و موجودی فعلی را بررسی کن. عملیات پس از تأیید سرور در سوابق ثبت می‌شود.</p></div>
+      </section>
+
       <!-- SUPPORT CENTER -->
       <section class="view" id="view-support">
         <div class="page-head"><div><h1 class="page-title">مرکز پشتیبانی</h1><div class="page-sub">ارتباط مستقیم برای راهنمایی و پیگیری مشکلات سامانه</div></div></div>
@@ -800,7 +858,7 @@ body.photo-view-open{overflow:hidden;touch-action:none}
             <div class="support-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.7 7.4L3 21l2.1-5.3A8.5 8.5 0 1 1 21 11.5Z"></path><path d="M8 12h8M8 8.5h5"></path></svg></div>
             <div class="section-kicker">MITRA WAREHOUSE</div><h2 class="section-title">همیشه در دسترس شما</h2>
             <p class="muted">برای راهنمایی، گزارش خطا یا پیگیری مسائل مربوط به مدیریت انبار با مسئول پشتیبانی تماس بگیرید.</p>
-            <div class="support-info"><span>مسئول پشتیبانی</span><strong>مهندس جناب آقای حسین نجفی</strong></div>
+            <div class="support-info"><span>مسئول پشتیبانی</span><strong>مهندس حسین نجفی</strong></div>
             <div class="support-info"><span>شماره تماس</span><strong dir="ltr">09045455385</strong></div>
             <a class="btn btn-primary support-call" href="tel:09045455385">تماس با پشتیبانی</a>
           </div>
@@ -848,51 +906,52 @@ body.photo-view-open{overflow:hidden;touch-action:none}
         <div class="card glass" style="margin-top:14px">
           <h2 style="font-size:var(--fs-lg);margin:0 0 10px">درباره برنامه</h2>
           <div class="kv">
-            <div class="item"><div class="k">نسخه</div><div class="v" id="appVersion">۱.۰.۰</div></div>
+            <div class="item"><div class="k">نسخه</div><div class="v" id="appVersion">۱.۶۹.۸۵</div></div>
             <div class="item"><div class="k">نسخه پایگاه داده</div><div class="v" id="dbVersionInfo">۱</div></div>
             <div class="item"><div class="k">حالت نمایش</div><div class="v" id="displayMode">مرورگر</div></div>
             <div class="item"><div class="k">سرویس‌ورکر</div><div class="v" id="swStatus">—</div></div>
           </div>
         </div>
       </section>
+      <footer class="app-footer">Designed by Hossein · MITRA WAREHOUSE <span id="footerVersion">1.69.85</span></footer>
     </main>
     <button type="button" class="floating-support" id="floatingSupportBtn" aria-label="رفتن به پشتیبانی"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.7 7.4L3 21l2.1-5.3A8.5 8.5 0 1 1 21 11.5Z"></path><path d="M8 12h8M8 8.5h5"></path></svg><span>پشتیبانی</span></button>
   </div>
 </div>
 
-<nav class="bottom-nav" aria-label="ناوبری موبایل">
+<nav class="bottom-nav" aria-label="ناوبری اصلی موبایل">
   <div class="bottom-nav-inner">
-    <button class="bn-item active" data-view="dashboard"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg><span>داشبورد</span></button>
-    <button class="bn-item" data-view="inventory"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8L12 3 3 8v8l9 5 9-5V8z"></path></svg><span>انبار</span></button>
-    <button class="bn-item" data-view="incoming"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14"></path><path d="M5 12l7 7 7-7"></path></svg><span>ورود</span></button>
-    <button class="bn-item" data-view="outgoing"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5"></path><path d="M5 12l7-7 7 7"></path></svg><span>خروج</span></button>
-    <button class="bn-item" data-view="more"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="12" cy="19" r="1.5"></circle></svg><span>بیشتر</span></button>
+    <button class="bn-item active" data-view="dashboard" aria-label="خانه"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z"/></svg><span>خانه</span></button>
+    <button class="bn-item" data-view="inventory" aria-label="کالاها"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></svg><span>کالاها</span></button>
+    <button class="bn-item bn-item-primary" data-view="operations" aria-label="ثبت عملیات"><span class="bn-plus">＋</span><span>عملیات</span></button>
+    <button class="bn-item" data-view="history" aria-label="تاریخچه"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>تاریخچه</span></button>
+    <button class="bn-item" data-view="reports" aria-label="گزارش‌ها"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5M4 19h17"/><path d="m7 14 4-4 3 3 6-7"/></svg><span>گزارش‌ها</span></button>
   </div>
 </nav>
 
 <div class="modal-overlay" id="modalOverlay"><div class="modal glass" id="modalBox" role="dialog" aria-modal="true"><div class="modal-head"><h2 class="modal-title">حذف دائمی</h2></div><div class="modal-body">این کالا برای همیشه حذف می‌شود و قابل بازیابی نیست.<br><br>«10 هزار بهخواب 180*200»</div><div class="modal-foot"><button class="btn btn-danger" id="cmConfirm">حذف دائمی</button><button class="btn btn-ghost" id="cmCancel">لغو</button></div></div></div>
 <div class="toast-stack" id="toastStack"></div>
-<button id="manualRefreshBtn" class="manual-refresh-btn" type="button" aria-label="بروزرسانی برنامه" title="بروزرسانی برنامه">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7v5h-5"></path><path d="M4 17v-5h5"></path><path d="M5.6 9A7 7 0 0 1 17.5 6L20 12M4 12l2.5 6A7 7 0 0 0 18.4 15"></path></svg>
-</button>
-<div id="swUpdateToast" class="update-required-overlay" role="dialog" aria-modal="true" aria-labelledby="updateRequiredTitle">
-  <div class="update-required-card">
-    <div class="update-required-icon">↻</div>
-    <h2 id="updateRequiredTitle">نسخه جدید آماده است</h2>
-    <p id="updateRequiredText">برای ادامه استفاده از سامانه، لطفاً برنامه را به‌روزرسانی کنید.</p>
-    <button class="btn btn-primary" id="swUpdateBtn" type="button">تأیید و بروزرسانی</button>
+<div id="swUpdateToast" style="position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:210;display:none;background:rgba(23,16,36,.97);border:1px solid var(--glass-brd);border-radius:14px;padding:12px 16px;box-shadow:var(--shadow);max-width:90vw">
+  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <span style="font-size:var(--fs-sm);font-weight:700">نسخه جدید برنامه آماده است.</span>
+    <button class="btn btn-primary btn-sm" id="swUpdateBtn">به‌روزرسانی</button>
   </div>
 </div>
 
-<div id="photoLightbox" class="photo-lightbox">
-  <button id="photoLightboxClose" class="photo-lightbox-close">×</button>
-  <button id="photoLightboxZoom" class="photo-lightbox-zoom">بزرگ‌نمایی</button>
-  <div class="photo-lightbox-stage">
-    <img id="photoLightboxImage" alt="نمایش تصویر">
-  </div>
+<div id="photoLightbox" class="photo-lightbox" role="dialog" aria-modal="true" aria-label="نمایش تصویر">
+  <button id="photoLightboxClose" class="photo-lightbox-close" type="button" aria-label="بستن تصویر">×</button>
+  <button id="photoLightboxZoom" class="photo-lightbox-zoom" type="button">بزرگ‌نمایی</button>
+  <div class="photo-lightbox-stage"><img id="photoLightboxImage" alt="نمایش تصویر"></div>
   <div id="photoLightboxCaption" class="photo-lightbox-caption"></div>
 </div>
-
+<div id="mandatoryUpdateModal" class="mandatory-update-overlay" role="dialog" aria-modal="true" aria-labelledby="mandatoryUpdateTitle" style="display:none">
+  <div class="mandatory-update-card glass">
+    <div class="mandatory-update-icon">↻</div>
+    <h2 id="mandatoryUpdateTitle">بروزرسانی ضروری برنامه</h2>
+    <p id="mandatoryUpdateText">نسخه جدید آماده است. برای ادامه استفاده، برنامه را بروزرسانی کنید.</p>
+    <button type="button" class="btn btn-primary btn-block" id="mandatoryUpdateConfirm">تأیید و بروزرسانی</button>
+  </div>
+</div>
 <script>
 /* ============================================================
  * WAREHOUSE PWA — Persian offline-first inventory management
@@ -900,9 +959,36 @@ body.photo-view-open{overflow:hidden;touch-action:none}
 (function(){
 "use strict";
 
+function on(id,eventName,handler){
+  var node=document.getElementById(id);
+  if(!node){console.warn("MITRA: element not found for listener:",id);return null;}
+  node.addEventListener(eventName,handler);
+  return node;
+}
+
+var remoteVersionCheckBusy=false,mandatoryVersionToApply=null;
+async function checkRemoteVersion(){
+  if(remoteVersionCheckBusy||!navigator.onLine) return;
+  remoteVersionCheckBusy=true;
+  try{
+    var response=await fetch("./version.json?check="+Date.now(),{cache:"no-store",headers:{"Cache-Control":"no-cache"}});
+    if(!response.ok) throw new Error("version.json unavailable");
+    var info=await response.json(),remote=String(info.version||"").trim();
+    var acknowledged=localStorage.getItem("mitra_warehouse_ack_version")||APP_VERSION;
+    if(remote && remote!==acknowledged){
+      mandatoryVersionToApply=remote;
+      var modal=document.getElementById("mandatoryUpdateModal");
+      var label=document.getElementById("mandatoryUpdateText");
+      if(label) label.textContent="نسخه "+remote+" آماده است. برای ادامه استفاده، بروزرسانی را تأیید کنید.";
+      if(modal) modal.style.display="flex";
+    }
+  }catch(err){console.warn("Version check:",err.message||err);}
+  finally{remoteVersionCheckBusy=false;}
+}
+
 var DB_NAME = "warehouseDB";
 var DB_VERSION = 1;
-var STORES = ["products","transactions","history","recycleBin","settings","inbox","notification_settings"];
+var STORES = ["products","transactions","history","recycleBin","settings"];
 var APP_VERSION = "1.69.85";
 var PAGE_SIZE = 20;
 var JALALI_MONTHS = ["فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"];
@@ -1029,19 +1115,19 @@ async function openDB(){
   return Promise.resolve();
 }
 async function dbGetAll(store){
-  if(!sb) throw new Error("اتصال دیتابیس هنوز برقرار نشده است.");
+  if(!sb||!currentUser) throw new Error("اتصال دیتابیس آماده نیست؛ ابتدا وارد حساب کاربری شوید.");
   var q=await sb.from("warehouse_records").select("payload").eq("store_name",store);
   if(q.error) throw q.error;
   return (q.data||[]).map(function(r){return r.payload;});
 }
 async function dbGet(store,key){
-  if(!sb) throw new Error("اتصال دیتابیس هنوز برقرار نشده است.");
+  if(!sb||!currentUser) throw new Error("اتصال دیتابیس آماده نیست؛ ابتدا وارد حساب کاربری شوید.");
   var q=await sb.from("warehouse_records").select("payload").eq("store_name",store).eq("record_id",String(key)).maybeSingle();
   if(q.error) throw q.error;
   return q.data?q.data.payload:undefined;
 }
 async function dbPut(store,val){
-  if(!sb||!currentUser) throw new Error("ابتدا وارد حساب کاربری شوید.");
+  if(!sb||!currentUser) throw new Error("اتصال دیتابیس آماده نیست؛ ابتدا وارد حساب کاربری شوید.");
   var id=getRecordId(store,val);
   var q=await sb.from("warehouse_records").upsert({
     store_name:store,record_id:id,payload:val,updated_by:currentUser.id
@@ -1097,7 +1183,7 @@ var modalOverlay=document.getElementById("modalOverlay");
 var modalBox=document.getElementById("modalBox");
 function showModal(html){ modalBox.innerHTML=html; modalOverlay.classList.add("show"); var f=modalBox.querySelector("[autofocus]"); if(f) f.focus(); }
 function closeModal(){ modalOverlay.classList.remove("show"); }
-modalOverlay.addEventListener("click",function(e){ if(e.target===modalOverlay) closeModal(); });
+if(modalOverlay) modalOverlay.addEventListener("click",function(e){ if(e.target===modalOverlay) closeModal(); });
 document.addEventListener("keydown",function(e){ if(e.key==="Escape"&&modalOverlay.classList.contains("show")) closeModal(); });
 function confirmModal(title,body,confirmText,onConfirm,opts){
   opts=opts||{};
@@ -1110,15 +1196,17 @@ function confirmModal(title,body,confirmText,onConfirm,opts){
 /* Navigation */
 var currentView="dashboard";
 function showView(name){
-  if(name==="more"){ openSidebar(); return; }
+  if(name==="more") name="operations";
   currentView=name;
   document.querySelectorAll(".view").forEach(function(v){ v.classList.remove("active"); });
   var el=document.getElementById("view-"+name); if(el) el.classList.add("active");
   document.querySelectorAll(".nav-item").forEach(function(n){ n.classList.toggle("active",n.dataset.view===name); });
-  document.querySelectorAll(".bn-item").forEach(function(n){ n.classList.toggle("active",n.dataset.view===name); });
+  var mobileTab=(name==="incoming"||name==="outgoing"||name==="photos"||name==="inbox"||name==="backup"||name==="settings"||name==="support"||name==="recycle")?"operations":name;
+  document.querySelectorAll(".bn-item").forEach(function(n){ n.classList.toggle("active",n.dataset.view===mobileTab); });
   closeSidebar(); window.scrollTo(0,0); renderView(name);
 }
 function renderView(name){
+  if(name==="operations") return;
   if(name==="dashboard") renderDashboard();
   else if(name==="inventory") renderInventory();
   else if(name==="incoming") renderRecent("incoming");
@@ -1139,8 +1227,8 @@ var sidebar=document.getElementById("sidebar");
 var scrim=document.getElementById("scrim");
 function openSidebar(){ sidebar.classList.add("open"); scrim.classList.add("show"); }
 function closeSidebar(){ sidebar.classList.remove("open"); scrim.classList.remove("show"); }
-document.getElementById("menuBtn").addEventListener("click",openSidebar);
-scrim.addEventListener("click",closeSidebar);
+on("menuBtn","click",openSidebar);
+if(scrim) scrim.addEventListener("click",closeSidebar);
 
 /* Clock */
 function tick(){
@@ -1154,8 +1242,10 @@ setInterval(tick,1000); tick();
 /* Network */
 function updateNet(){
   var p=document.getElementById("netStatus");
-  if(navigator.onLine){ p.className="status-pill online"; p.querySelector("span:last-child").textContent="آنلاین"; }
-  else { p.className="status-pill offline"; p.querySelector("span:last-child").textContent="آفلاین"; }
+  if(!p) return;
+  var label=p.querySelector("span:last-child");
+  if(navigator.onLine){ p.className="status-pill online"; if(label) label.textContent="آنلاین"; }
+  else { p.className="status-pill offline"; if(label) label.textContent="آفلاین"; }
 }
 window.addEventListener("online",updateNet); window.addEventListener("offline",updateNet); updateNet();
 
@@ -1193,7 +1283,7 @@ async function renderDashboard(){
     return '<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.06)"><div><div style="font-weight:600">'+escapeHtml(p.name)+' '+escapeHtml(p.brand)+' <span class="muted">'+escapeHtml(p.size)+'</span></div><div class="hint">موجودی: '+toFa(p.quantity||0)+' / حداقل: '+toFa(p.minimumStock||0)+'</div></div>'+statusBadge(statusOf(p))+'</div>';
   }).join(""); } else { lcCard.style.display="none"; }
 }
-document.getElementById("rangeTabs").addEventListener("click",function(e){
+on("rangeTabs","click",function(e){
   if(e.target.dataset.range){ dashboardRange=parseInt(e.target.dataset.range,10);
     document.querySelectorAll("#rangeTabs .chart-tab").forEach(function(t){t.classList.toggle("active",t===e.target);}); renderDashboard(); }
 });
@@ -1252,7 +1342,7 @@ function drawStatusChart(products){
 
 /* INVENTORY */
 var invPage=1, invFiltered=[], invFilters={name:"",brand:"",size:"",status:""};
-document.getElementById("addProductBtn").addEventListener("click",function(){ openProductModal(null); });
+on("addProductBtn","click",function(){ openProductModal(null); });
 ["fName","fBrand","fSize","fStatus"].forEach(function(id){
   document.getElementById(id).addEventListener("input",function(){
     invFilters.name=document.getElementById("fName").value.trim().toLowerCase();
@@ -1304,7 +1394,7 @@ var MITRA_SIZES=["80*180","90*200","100*200","120*200","140*200","160*200","180*
 function openProductModal(product){
   var p=product||{name:"",brand:"",size:"",sku:"",quantity:"",minimumStock:"",notes:""};
   showModal('<div class="modal-head"><h2 class="modal-title">'+(product?"ویرایش کالا":"کالای جدید")+'</h2><button class="icon-btn" onclick="app.closeModal()"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg></button></div><form id="productForm"><div class="grid3"><div class="field"><label>نام کالا <span class="req">*</span></label><input class="input" name="name" value="'+escapeHtml(p.name)+'" required autofocus></div>'+optionSelectHtml("brand","برند",MITRA_BRANDS,p.brand)+' '+optionSelectHtml("size","سایز",MITRA_SIZES,p.size)+'</div><div class="grid3"><div class="field"><label>موجودی <span class="req">*</span></label><input class="input" name="quantity" type="number" min="0" value="'+(p.quantity!=null?p.quantity:"")+'" required></div><div class="field"><label>حداقل موجودی</label><input class="input" name="minimumStock" type="number" min="0" value="'+(p.minimumStock||"")+'"></div><div class="field"><label>SKU</label><input class="input" name="sku" value="'+escapeHtml(p.sku||"")+'"></div></div><div class="field"><label>یادداشت</label><textarea class="textarea" name="notes">'+escapeHtml(p.notes||"")+'</textarea></div><div class="modal-foot"><button type="submit" class="btn btn-primary">ذخیره</button><button type="button" class="btn btn-ghost" onclick="app.closeModal()">لغو</button></div></form>');
-  document.getElementById("productForm").addEventListener("submit",function(e){
+  on("productForm","submit",function(e){
     e.preventDefault(); var f=e.target;
     var name=f.name.value.trim(),brand=f.brand.value.trim(),size=f.size.value.trim();
     var quantity=clamp(toEn(f.quantity.value)),minimumStock=clamp(toEn(f.minimumStock.value));
@@ -1330,8 +1420,35 @@ async function deleteProduct(id){
   },{danger:true});
 }
 
+/* ATOMIC STOCK MOVEMENT — requires warehouse_apply_movement SQL migration */
+async function commitMovement(type,product,quantity,notes,form,extra){
+  if(!sb||!currentUser) throw new Error("اتصال امن به دیتابیس برقرار نیست.");
+  if(!Number.isInteger(quantity)||quantity<=0) throw new Error("تعداد عملیات باید عدد صحیح و بزرگ‌تر از صفر باشد.");
+  if(form&&form.dataset.busy==="1") return false;
+  var submit=form?form.querySelector('button[type="submit"]'):null;
+  if(form) form.dataset.busy="1";
+  if(submit){submit.disabled=true;submit.dataset.oldText=submit.textContent;submit.textContent="در حال ثبت…";}
+  var operationId=uid(),stamp=now(),before=Number(product.quantity||0);
+  var tx={id:operationId,type:type,productId:product.id,productName:product.name,brand:product.brand,size:product.size,quantity:quantity,sku:(extra&&extra.sku)||product.sku||"",notes:notes||"",timestamp:stamp,operationId:operationId,actorId:currentUser.id,actorName:(currentProfile&&currentProfile.display_name)||"کاربر"};
+  var history={id:operationId,action:type,details:{productId:product.id,productName:product.name,brand:product.brand,size:product.size,quantity:quantity,beforeQuantity:before,actorName:(currentProfile&&currentProfile.display_name)||"کاربر",actorId:currentUser.id,notes:notes||"",operationId:operationId},timestamp:stamp};
+  try{
+    var result=await sb.rpc("warehouse_apply_movement",{
+      p_operation_id:operationId,p_type:type,p_product_id:String(product.id),
+      p_product_seed:product,p_quantity:quantity,p_transaction:tx,p_history:history
+    });
+    if(result.error) throw result.error;
+    if(form) form.dataset.busy="0";
+    if(submit){submit.disabled=false;submit.textContent=submit.dataset.oldText||"ثبت";}
+    return result.data;
+  }catch(error){
+    if(form) form.dataset.busy="0";
+    if(submit){submit.disabled=false;submit.textContent=submit.dataset.oldText||"ثبت";}
+    throw error;
+  }
+}
+
 /* INCOMING */
-document.getElementById("incomingForm").addEventListener("submit",async function(e){
+on("incomingForm","submit",async function(e){
   e.preventDefault(); var f=e.target;
   var name=f.name.value.trim(),brand=f.brand.value.trim(),size=f.size.value.trim();
   var quantity=clamp(toEn(f.quantity.value)),sku=f.sku.value.trim(),notes=f.notes.value.trim();
@@ -1343,18 +1460,19 @@ document.getElementById("incomingForm").addEventListener("submit",async function
   var existing=await findProduct(name,brand,size);
   if(existing){
     confirmModal("این کالا قبلاً ثبت شده است.","کالای «"+escapeHtml(name)+" "+escapeHtml(brand)+" "+escapeHtml(size)+"» در انبار موجود است.<br><br>موجودی فعلی: <b>"+toFa(existing.quantity)+"</b><br>تعداد ورودی: <b>"+toFa(quantity)+"</b><br>موجودی جدید: <b>"+toFa(existing.quantity+quantity)+"</b><br><br>آیا می‌خواهید تعداد جدید به موجودی فعلی اضافه شود؟","تأیید و افزایش موجودی",async function(){
-      existing.quantity+=quantity; existing.sku=existing.sku||sku; existing.updatedAt=now();
-      await dbPut("products",existing);
-      await dbPut("transactions",{id:uid(),type:"incoming",productId:existing.id,productName:name,brand:brand,size:size,quantity:quantity,sku:sku,notes:notes,timestamp:now()});
-      await logHistory("incoming",{productName:name,brand:brand,size:size,quantity:quantity});
-      toast("موجودی کالا افزایش یافت.","ok"); f.reset(); renderRecent("incoming"); if(currentView==="dashboard") renderDashboard();
+      try{
+        existing.sku=existing.sku||sku; existing.updatedAt=now();
+        await commitMovement("incoming",existing,quantity,notes,f,{sku:sku});
+        toast("ورود کالا با تأیید سرور ثبت شد.","ok"); f.reset(); renderRecent("incoming"); if(currentView==="dashboard") renderDashboard();
+      }catch(err){console.error("Incoming movement:",err);toast("ثبت ورود ناموفق بود: "+(err.message||"خطای سرور"),"err");}
     },{gold:true});
   } else {
     var prod={id:uid(),name:name,brand:brand,size:size,sku:sku,quantity:quantity,minimumStock:0,notes:notes,createdAt:now(),updatedAt:now()};
-    await dbPut("products",prod);
-    await dbPut("transactions",{id:uid(),type:"incoming",productId:prod.id,productName:name,brand:brand,size:size,quantity:quantity,sku:sku,notes:notes,timestamp:now()});
-    await logHistory("incoming",{productName:name,brand:brand,size:size,quantity:quantity});
-    toast("کالای جدید با ورودی ثبت شد.","ok"); f.reset(); renderRecent("incoming"); if(currentView==="dashboard") renderDashboard();
+    prod.quantity=0;
+    try{
+      await commitMovement("incoming",prod,quantity,notes,f,{sku:sku});
+      toast("کالای جدید و موجودی آن با تأیید سرور ثبت شد.","ok"); f.reset(); renderRecent("incoming"); if(currentView==="dashboard") renderDashboard();
+    }catch(err){console.error("Incoming movement:",err);toast("ثبت ورود ناموفق بود: "+(err.message||"خطای سرور"),"err");}
   }
 });
 async function renderRecent(type){
@@ -1386,16 +1504,16 @@ async function renderOutgoingSelect(query){
   if(current && filtered.some(function(p){return p.id===current;})) sel.value=current;
   else document.getElementById("outStockInfo").innerHTML="";
 }
-document.getElementById("outProductSearch").addEventListener("input",function(){
+on("outProductSearch","input",function(){
   var selected=document.getElementById("outProductSel"); selected.value="";
   document.getElementById("outStockInfo").innerHTML="";
   renderOutgoingSelect(this.value);
 });
-document.getElementById("outProductSel").addEventListener("change",function(){
+on("outProductSel","change",function(){
   var opt=this.options[this.selectedIndex]; var qty=opt?opt.getAttribute("data-qty"):null;
   document.getElementById("outStockInfo").innerHTML=qty!==null&&qty!==undefined?"موجودی فعلی: <b>"+toFa(qty)+"</b>":"";
 });
-document.getElementById("outgoingForm").addEventListener("submit",async function(e){
+on("outgoingForm","submit",async function(e){
   e.preventDefault(); var f=e.target;
   var productId=f.productId.value,quantity=clamp(toEn(f.quantity.value)),notes=f.notes.value.trim();
   clearFormErrors(f);
@@ -1407,11 +1525,11 @@ document.getElementById("outgoingForm").addEventListener("submit",async function
   await doOutgoing(product,quantity,notes,f);
 });
 async function doOutgoing(product,quantity,notes,f){
-  product.quantity-=quantity; product.updatedAt=now(); await dbPut("products",product);
-  await dbPut("transactions",{id:uid(),type:"outgoing",productId:product.id,productName:product.name,brand:product.brand,size:product.size,quantity:quantity,customerName:"",invoiceNumber:"",notes:notes,timestamp:now()});
-  await logHistory("outgoing",{productName:product.name,brand:product.brand,size:product.size,quantity:quantity});
-  toast("خروج کالا با موفقیت ثبت شد.","ok"); f.reset(); document.getElementById("outStockInfo").innerHTML="";
-  renderOutgoingSelect(); renderRecent("outgoing"); if(currentView==="dashboard") renderDashboard();
+  try{
+    await commitMovement("outgoing",product,quantity,notes,f,{});
+    toast("خروج کالا با تأیید سرور ثبت شد.","ok"); f.reset(); document.getElementById("outStockInfo").innerHTML="";
+    renderOutgoingSelect(); renderRecent("outgoing"); if(currentView==="dashboard") renderDashboard();
+  }catch(err){console.error("Outgoing movement:",err);toast("ثبت خروج ناموفق بود: "+(err.message||"خطای سرور"),"err");}
 }
 
 function showFieldError(input,msg){ var field=input.closest(".field"); if(!field) return; var em=field.querySelector(".err-msg"); if(em){em.textContent=msg;em.classList.add("show");} input.style.borderColor="var(--err)"; }
@@ -1419,16 +1537,16 @@ function clearFormErrors(form){ form.querySelectorAll(".err-msg").forEach(functi
 
 /* REPORTS */
 var reportRange="7",reportPage=1,reportFiltered=[];
-document.getElementById("reportRanges").addEventListener("click",function(e){
+on("reportRanges","click",function(e){
   if(!e.target.dataset.range) return; reportRange=e.target.dataset.range;
   document.querySelectorAll("#reportRanges .chip").forEach(function(c){c.classList.toggle("active",c===e.target);});
   document.getElementById("customRange").style.display=(reportRange==="custom")?"block":"none"; reportPage=1; renderReports();
 });
-document.getElementById("applyCustom").addEventListener("click",function(){reportPage=1;renderReports();});
+on("applyCustom","click",function(){reportPage=1;renderReports();});
 ["rptType","rptName","rptBrand","rptSize","rptCustomer","rptInvoice"].forEach(function(id){
   document.getElementById(id).addEventListener("input",function(){reportPage=1;renderReports();});
 });
-document.getElementById("rptType").addEventListener("change",function(){reportPage=1;renderReports();});
+on("rptType","change",function(){reportPage=1;renderReports();});
 function getReportDateRange(){
   var today=new Date(); today.setHours(0,0,0,0); var from,to=today.getTime()+86400000-1;
   if(reportRange==="today") from=today.getTime();
@@ -1465,7 +1583,7 @@ async function renderReports(){
   cards.innerHTML=items.map(function(t){ return '<div class="product-card glass"><div class="pc-head"><div><div class="pc-title">'+escapeHtml(t.productName)+'</div><div class="pc-meta">'+escapeHtml(t.brand)+' • '+escapeHtml(t.size)+'</div></div>'+(t.type==="incoming"?'<span class="tag in">ورود</span>':'<span class="tag out">خروج</span>')+'</div><div class="pc-grid"><div class="pc-cell"><div class="k">تعداد</div><div class="v">'+toFa(t.quantity)+'</div></div><div class="pc-cell"><div class="k">تاریخ</div><div class="v" style="font-size:var(--fs-xs)">'+formatJalali(t.timestamp)+'</div></div><div class="pc-cell"><div class="k">مشتری</div><div class="v">'+(t.customerName?escapeHtml(t.customerName):"—")+'</div></div><div class="pc-cell"><div class="k">فاکتور</div><div class="v">'+(t.invoiceNumber?escapeHtml(t.invoiceNumber):"—")+'</div></div></div></div>'; }).join("");
   renderPager("reportPager",reportPage,totalPages,function(p){reportPage=p;renderReports();});
 }
-document.getElementById("csvBtn").addEventListener("click",async function(){
+on("csvBtn","click",async function(){
   var txns=reportFiltered;
   if(txns.length===0){ toast("داده‌ای برای خروجی وجود ندارد.","warn"); return; }
   var rows=[["تاریخ","زمان","نوع","نام کالا","برند","سایز","تعداد","مشتری","فاکتور","یادداشت"]];
@@ -1476,7 +1594,7 @@ document.getElementById("csvBtn").addEventListener("click",async function(){
   downloadBlob(blob,"warehouse-report-"+j[0]+"-"+pad2(j[1])+"-"+pad2(j[2])+".csv");
   toast("گزارش CSV دانلود شد.","ok");
 });
-document.getElementById("printReportBtn").addEventListener("click",function(){ window.print(); });
+on("printReportBtn","click",function(){ window.print(); });
 function downloadBlob(blob,fname){ var a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download=fname; document.body.appendChild(a); a.click(); setTimeout(function(){URL.revokeObjectURL(a.href);if(a.parentNode)a.parentNode.removeChild(a);},100); }
 
 /* HISTORY */
@@ -1499,7 +1617,7 @@ async function renderHistory(){
   }).join("");
   renderPager("histPager",histPage,totalPages,function(p){histPage=p;renderHistory();});
 }
-document.getElementById("clearHistBtn").addEventListener("click",function(){
+on("clearHistBtn","click",function(){
   confirmModal("پاک کردن تاریخچه","تمام رکوردهای تاریخچه حذف می‌شوند. این عمل قابل بازگشت نیست.","پاک کردن",async function(){ await dbClear("history"); toast("تاریخچه پاک شد.","ok"); renderHistory(); },{danger:true});
 });
 
@@ -1520,8 +1638,8 @@ async function renderInbox(){
   await updateInboxBadge();
 }
 async function markInboxRead(id){var n=await dbGet("inbox",id);if(!n||n.userId!==currentUser.id)return;n.read=true;n.readAt=now();await dbPut("inbox",n);await renderInbox();}
-document.getElementById("inboxEnabled").addEventListener("change",async function(){await dbPut("notification_settings",{id:currentUser.id,enabled:this.checked});toast(this.checked?"اعلان‌های ورود و خروج فعال شد.":"اعلان‌های جدید برای شما غیرفعال شد.","ok");});
-document.getElementById("markAllReadBtn").addEventListener("click",async function(){var rows=await inboxRows();for(var i=0;i<rows.length;i++){if(!rows[i].read){rows[i].read=true;rows[i].readAt=now();await dbPut("inbox",rows[i]);}}await renderInbox();toast("همه اعلان‌ها خوانده شدند.","ok");});
+on("inboxEnabled","change",async function(){await dbPut("notification_settings",{id:currentUser.id,enabled:this.checked});toast(this.checked?"اعلان‌های ورود و خروج فعال شد.":"اعلان‌های جدید برای شما غیرفعال شد.","ok");});
+on("markAllReadBtn","click",async function(){var rows=await inboxRows();for(var i=0;i<rows.length;i++){if(!rows[i].read){rows[i].read=true;rows[i].readAt=now();await dbPut("inbox",rows[i]);}}await renderInbox();toast("همه اعلان‌ها خوانده شدند.","ok");});
 document.querySelectorAll("[data-inbox-filter]").forEach(function(b){b.addEventListener("click",function(){inboxFilter=b.dataset.inboxFilter;document.querySelectorAll("[data-inbox-filter]").forEach(function(x){x.className=x===b?"btn btn-primary btn-sm":"btn btn-ghost btn-sm";});renderInbox();});});
 
 /* RECYCLE */
@@ -1555,20 +1673,20 @@ async function purgeProduct(id){
     toast("کالا برای همیشه حذف شد.","info"); renderRecycle();
   },{danger:true});
 }
-document.getElementById("emptyRecycleBtn").addEventListener("click",function(){
+on("emptyRecycleBtn","click",function(){
   confirmModal("خالی کردن سطل زباله","تمام کالاهای حذف‌شده برای همیشه پاک می‌شوند. این عمل قابل بازگشت نیست.","خالی کردن",async function(){ await dbClear("recycleBin"); toast("سطل زباله خالی شد.","ok"); renderRecycle(); },{danger:true});
 });
 
 /* BACKUP */
-document.getElementById("backupBtn").addEventListener("click",async function(){
+on("backupBtn","click",async function(){
   var data={meta:{app:"warehouse-pwa",version:APP_VERSION,dbVersion:DB_VERSION,created:now(),createdJalali:formatJalali(now(),true)},products:await dbGetAll("products"),transactions:await dbGetAll("transactions"),history:await dbGetAll("history"),recycleBin:await dbGetAll("recycleBin"),settings:await dbGetAll("settings")};
   var blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
   var j=gregorianToJalali(new Date().getFullYear(),new Date().getMonth()+1,new Date().getDate());
   downloadBlob(blob,"warehouse-backup-"+j[0]+"-"+pad2(j[1])+"-"+pad2(j[2])+".json");
   await logHistory("backup_created",{}); toast("بکاپ دانلود شد.","ok"); renderDbInfo();
 });
-document.getElementById("restoreBtn").addEventListener("click",function(){ document.getElementById("restoreFile").click(); });
-document.getElementById("restoreFile").addEventListener("change",async function(e){
+on("restoreBtn","click",function(){ document.getElementById("restoreFile").click(); });
+on("restoreFile","change",async function(e){
   var file=e.target.files[0]; if(!file) return;
   try{
     var text=await file.text(); var data=JSON.parse(text);
@@ -1610,14 +1728,14 @@ function renderInstallArea(){
   var area=document.getElementById("installArea");
   if(deferredPrompt){
     area.innerHTML='<p class="muted" style="font-size:var(--fs-sm);margin:0 0 12px">برنامه قابل نصب است.</p><button class="btn btn-primary" id="installBtn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>نصب برنامه</button>';
-    document.getElementById("installBtn").addEventListener("click",async function(){ deferredPrompt.prompt(); var ch=await deferredPrompt.userChoice; if(ch.outcome==="accepted") toast("نصب شروع شد.","ok"); deferredPrompt=null; renderInstallArea(); });
+    on("installBtn","click",async function(){ deferredPrompt.prompt(); var ch=await deferredPrompt.userChoice; if(ch.outcome==="accepted") toast("نصب شروع شد.","ok"); deferredPrompt=null; renderInstallArea(); });
   } else if(window.matchMedia("(display-mode: standalone)").matches||navigator.standalone){
     area.innerHTML='<p class="muted" style="font-size:var(--fs-sm);margin:0">برنامه نصب شده و در حالت استندالون اجرا می‌شود.</p>';
   } else if(/iPhone|iPad|iPod/.test(navigator.userAgent)&&!window.MSStream){
     area.innerHTML='<p class="muted" style="font-size:var(--fs-sm);margin:0">برای نصب، از گزینه Add to Home Screen استفاده کنید.<br>در سافاری دکمه اشتراک‌گذاری را بزنید و «Add to Home Screen» را انتخاب کنید.</p>';
   } else { area.innerHTML='<p class="muted" style="font-size:var(--fs-sm);margin:0">مرورگر شما از نصب پشتیبانی نمی‌کند یا نصب در دسترس نیست.</p>'; }
 }
-document.getElementById("resetBtn").addEventListener("click",async function(){
+on("resetBtn","click",async function(){
   confirmModal("حذف تمام اطلاعات","این عمل <b>تمام</b> محصولات، تراکنش‌ها، تاریخچه و سطل زباله را پاک می‌کند.<br><br>پیش از ادامه، یک بکاپ تهیه کنید.","ابتدا یک بکاپ تهیه کن",async function(){
     var data={meta:{app:"warehouse-pwa",version:APP_VERSION,dbVersion:DB_VERSION,created:now(),createdJalali:formatJalali(now(),true),preReset:true},products:await dbGetAll("products"),transactions:await dbGetAll("transactions"),history:await dbGetAll("history"),recycleBin:await dbGetAll("recycleBin"),settings:await dbGetAll("settings")};
     var blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
@@ -1638,8 +1756,7 @@ async function cleanupExpiredPhotos(){
   if(expired.error) throw expired.error;
   for(var i=0;i<(expired.data||[]).length;i++){
     var item=expired.data[i];
-    var removed=await sb.storage.from("warehouse-photos").remove([item.storage_path]);
-    if(removed.error){console.warn("حذف فایل تصویر منقضی‌شده ناموفق بود",removed.error);continue;}
+    try{await sb.storage.from("warehouse-photos").remove([item.storage_path]);}catch(e){}
     var del=await sb.from("warehouse_photos").delete().eq("id",item.id);
     if(del.error) console.warn("حذف اطلاعات تصویر منقضی‌شده ناموفق بود",del.error);
   }
@@ -1663,85 +1780,69 @@ async function renderPhotos(){
     gallery.innerHTML=html.filter(Boolean).join("")||'<div class="card glass empty"><div class="t">تصویری برای نمایش وجود ندارد.</div></div>';
   }catch(err){console.error("Photo gallery:",err);gallery.innerHTML='<div class="card glass"><div class="t">دریافت تصاویر انجام نشد.</div><div class="hint">لطفاً یک‌بار تنظیمات فضای ذخیره‌سازی تصاویر را بررسی کنید.</div></div>';}
 }
-document.getElementById("photoUploadBtn").addEventListener("click",async function(){
-  var input=document.getElementById("photoFile");
-  var status=document.getElementById("photoUploadStatus");
-  var btn=this;
-  var file=input&&input.files&&input.files[0];
-  if(!currentUser||!sb){status.textContent="اتصال برقرار نیست؛ ابتدا دوباره وارد حساب شوید.";return;}
+on("photoUploadBtn","click",async function(){
+  var input=document.getElementById("photoFile"),status=document.getElementById("photoUploadStatus"),btn=this,file=input.files&&input.files[0];
+  if(!sb||!currentUser){status.textContent="ابتدا وارد حساب کاربری شوید.";return;}
+  if(!navigator.onLine){status.textContent="برای بارگذاری تصویر اتصال اینترنت لازم است.";return;}
   if(!file){status.textContent="ابتدا یک تصویر انتخاب کنید.";return;}
-  var allowedTypes=["image/jpeg","image/png","image/webp","image/gif"];
-  if(allowedTypes.indexOf(file.type)===-1){status.textContent="فرمت مجاز: JPG، PNG، WEBP یا GIF.";return;}
+  if(!file.type.startsWith("image/")){status.textContent="فقط فایل تصویری قابل بارگذاری است.";return;}
   if(file.size>10*1024*1024){status.textContent="حجم تصویر نباید بیشتر از ۱۰ مگابایت باشد.";return;}
-  btn.disabled=true;
-  status.textContent="در حال بارگذاری تصویر...";
-  var safeName=(file.name||"photo.jpg").replace(/[^a-zA-Z0-9._-]/g,"_").slice(-70)||"photo.jpg";
+  btn.disabled=true;status.textContent="در حال بارگذاری تصویر...";
+  var safeName=file.name.replace(/[^a-zA-Z0-9._-]/g,"_").slice(-70)||"photo.jpg";
   var path=currentUser.id+"/"+Date.now()+"-"+safeName;
-  var fileUploaded=false;
   try{
-    var uploaded=await sb.storage.from("warehouse-photos").upload(path,file,{
-      cacheControl:"3600",upsert:false,contentType:file.type
-    });
+    var uploaded=await sb.storage.from("warehouse-photos").upload(path,file,{cacheControl:"3600",upsert:false,contentType:file.type});
     if(uploaded.error) throw uploaded.error;
-    fileUploaded=true;
     var expiresAt=new Date(Date.now()+30*60*60*1000).toISOString();
-    var saved=await sb.from("warehouse_photos").insert({
-      storage_path:path,
-      caption:(document.getElementById("photoCaption").value||"").trim(),
-      uploaded_by:currentUser.id,
-      uploader_name:(currentProfile&&currentProfile.display_name)||"کاربر",
-      expires_at:expiresAt
-    });
-    if(saved.error) throw saved.error;
-    input.value="";
-    document.getElementById("photoCaption").value="";
-    status.textContent="تصویر با موفقیت برای همه کاربران ثبت شد.";
-    await renderPhotos();
-  }catch(err){
-    console.error("Photo upload failed:",err);
-    if(fileUploaded){
-      var cleanup=await sb.storage.from("warehouse-photos").remove([path]);
-      if(cleanup.error) console.error("Uploaded file cleanup failed:",cleanup.error);
-    }
-    var code=err&&err.code?" ("+err.code+")":"";
-    var message=err&&err.message?String(err.message):"خطای نامشخص";
-    status.textContent="بارگذاری ناموفق بود: "+message+code;
-  }finally{
-    btn.disabled=false;
-  }
+    var saved=await sb.from("warehouse_photos").insert({storage_path:path,caption:document.getElementById("photoCaption").value.trim(),uploaded_by:currentUser.id,uploader_name:(currentProfile&&currentProfile.display_name)||"کاربر",expires_at:expiresAt});
+    if(saved.error){await sb.storage.from("warehouse-photos").remove([path]);throw saved.error;}
+    input.value="";document.getElementById("photoCaption").value="";status.textContent="تصویر برای همه کاربران ثبت شد.";await renderPhotos();
+  }catch(err){console.error("Photo upload:",err);status.textContent="بارگذاری ناموفق: "+(err.message||err.error_description||err.code||"خطای ناشناخته")+". دسترسی bucket و جدول warehouse_photos را بررسی کنید.";}
+  finally{btn.disabled=false;}
 });
-document.getElementById("refreshPhotosBtn").addEventListener("click",renderPhotos);
+on("refreshPhotosBtn","click",renderPhotos);
 
 var photoLightbox=document.getElementById("photoLightbox");
 var photoLightboxImage=document.getElementById("photoLightboxImage");
-var photoLightboxZoom=document.getElementById("photoLightboxZoom");
-if(!photoLightbox||!photoLightboxImage||!photoLightboxZoom) throw new Error("ساختار نمایش تمام‌صفحه تصویر در صفحه وجود ندارد.");
+
 function closePhotoLightbox(){
+  if(!photoLightbox||!photoLightboxImage) return;
   photoLightbox.classList.remove("show");
   photoLightboxImage.classList.remove("zoomed");
-  photoLightboxZoom.textContent="بزرگ‌نمایی";
-  photoLightboxImage.removeAttribute("src");
   document.body.classList.remove("photo-view-open");
 }
-function togglePhotoZoom(){
-  var zoomed=photoLightboxImage.classList.toggle("zoomed");
-  photoLightboxZoom.textContent=zoomed?"کوچک‌نمایی":"بزرگ‌نمایی";
-}
-document.getElementById("photoLightboxClose").addEventListener("click",closePhotoLightbox);
-photoLightboxZoom.addEventListener("click",togglePhotoZoom);
-photoLightboxImage.addEventListener("click",togglePhotoZoom);
-photoLightbox.addEventListener("click",function(e){if(e.target===photoLightbox)closePhotoLightbox();});
-document.addEventListener("keydown",function(e){if(e.key==="Escape"&&photoLightbox.classList.contains("show"))closePhotoLightbox();});
-document.getElementById("photoGallery").addEventListener("click",function(e){
+
+document.getElementById("photoLightboxClose").onclick=closePhotoLightbox;
+
+document.getElementById("photoLightboxZoom").onclick=function(){
+  photoLightboxImage.classList.toggle("zoomed");
+  this.textContent=photoLightboxImage.classList.contains("zoomed")
+    ?"کوچک‌نمایی":"بزرگ‌نمایی";
+};
+
+photoLightboxImage.onclick=function(){
+  this.classList.toggle("zoomed");
+};
+
+photoLightbox.onclick=function(e){
+  if(e.target===photoLightbox) closePhotoLightbox();
+};
+
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape") closePhotoLightbox();
+});
+
+on("photoGallery","click",function(e){
   var img=e.target.closest(".photo-card img");
   if(!img)return;
+
   photoLightboxImage.src=img.currentSrc||img.src;
   document.getElementById("photoLightboxCaption").textContent=img.alt||"";
   photoLightbox.classList.add("show");
   document.body.classList.add("photo-view-open");
 });
   
-  document.getElementById("photoGallery").addEventListener("click",async function(e){
+  on("photoGallery","click",async function(e){
   var btn=e.target.closest("[data-photo-delete]");if(!btn)return;
   if(!confirm("این تصویر برای همه کاربران حذف شود؟"))return;
   btn.disabled=true;
@@ -1753,120 +1854,52 @@ document.getElementById("photoGallery").addEventListener("click",function(e){
     await renderPhotos();toast("تصویر حذف شد.","ok");
   }catch(err){console.error(err);toast("حذف تصویر ناموفق بود. دسترسی‌ها را بررسی کنید.","err");btn.disabled=false;}
 });
-document.getElementById("floatingSupportBtn").addEventListener("click",function(){showView("support");});
+on("floatingSupportBtn","click",function(){showView("support");});
 
 /* GLOBAL SEARCH */
 var globalSearchQuery="",searchTimer=null;
-document.getElementById("globalSearch").addEventListener("input",function(){
+on("globalSearch","input",function(){
   var q=this.value.trim(); clearTimeout(searchTimer);
   searchTimer=setTimeout(function(){ globalSearchQuery=q; if(q){ if(currentView!=="inventory") showView("inventory"); else renderInventory(); } else { renderInventory(); } },220);
 });
 
-/* PWA UPDATE MANAGEMENT */
-var appUpdateRegistration=null;
-var pendingRemoteVersion=null;
-var updateDialogShown=false;
-var VERSION_STORAGE_KEY="mitra_warehouse_version";
-function showMandatoryUpdate(version){
-  if(version) pendingRemoteVersion=String(version);
-  if(updateDialogShown)return;
-  updateDialogShown=true;
-  document.getElementById("swUpdateToast").classList.add("show");
-  document.body.style.overflow="hidden";
-  var button=document.getElementById("swUpdateBtn");
-  button.disabled=false;
-  button.textContent="تأیید و بروزرسانی";
-}
-async function checkRemoteAppVersion(forceReload){
+on("mandatoryUpdateConfirm","click",async function(){
+  if(!mandatoryVersionToApply) return;
+  var button=this;button.disabled=true;button.textContent="در حال بروزرسانی…";
   try{
-    var response=await fetch("./version.json?check="+Date.now(),{cache:"no-store"});
-    if(!response.ok)throw new Error("Version check failed");
-    var data=await response.json();
-    var remoteVersion=String(data.version||"");
-    if(!remoteVersion)return;
-    var installedVersion=localStorage.getItem(VERSION_STORAGE_KEY);
-    if(!installedVersion){
-      installedVersion=APP_VERSION;
-      localStorage.setItem(VERSION_STORAGE_KEY,installedVersion);
+    localStorage.setItem("mitra_warehouse_ack_version",mandatoryVersionToApply);
+    if("serviceWorker" in navigator){
+      var reg=await navigator.serviceWorker.getRegistration();
+      if(reg){await reg.update();if(reg.waiting)reg.waiting.postMessage("SKIP_WAITING");}
     }
-    if(remoteVersion!==installedVersion){
-      showMandatoryUpdate(remoteVersion);
-      return;
-    }
-    if(forceReload)location.reload();
-  }catch(err){
-    console.warn("App version check:",err);
-    if(forceReload)location.reload();
-  }
-}
-async function applyMandatoryUpdate(){
-  var button=document.getElementById("swUpdateBtn");
-  button.disabled=true;
-  button.textContent="در حال بروزرسانی...";
-  try{
-    localStorage.setItem(VERSION_STORAGE_KEY,pendingRemoteVersion||APP_VERSION);
-    var reg=appUpdateRegistration;
-    if(reg){
-      await reg.update().catch(function(){});
-      if(reg.waiting){
-        var reloaded=false;
-        var reloadOnce=function(){if(reloaded)return;reloaded=true;location.reload();};
-        navigator.serviceWorker.addEventListener("controllerchange",reloadOnce,{once:true});
-        reg.waiting.postMessage("SKIP_WAITING");
-        setTimeout(reloadOnce,2500);
-        return;
-      }
-      if(reg.installing){
-        var installing=reg.installing;
-        await new Promise(function(resolve){
-          if(installing.state==="installed"||installing.state==="activated"){resolve();return;}
-          installing.addEventListener("statechange",function(){if(installing.state==="installed"||installing.state==="activated"||installing.state==="redundant")resolve();});
-          setTimeout(resolve,4000);
-        });
-        if(reg.waiting){
-          var done=false;
-          var reloadAfterController=function(){if(done)return;done=true;location.reload();};
-          navigator.serviceWorker.addEventListener("controllerchange",reloadAfterController,{once:true});
-          reg.waiting.postMessage("SKIP_WAITING");
-          setTimeout(reloadAfterController,2500);
-          return;
-        }
-      }
-    }
-  }catch(err){console.warn("Apply update:",err);}
-  location.reload();
-}
-document.getElementById("swUpdateBtn").addEventListener("click",applyMandatoryUpdate);
-document.getElementById("manualRefreshBtn").addEventListener("click",async function(){
-  this.disabled=true;
-  try{if(appUpdateRegistration)await appUpdateRegistration.update().catch(function(){});}catch(e){}
-  await checkRemoteAppVersion(true);
-  this.disabled=false;
+    location.reload();
+  }catch(err){button.disabled=false;button.textContent="تأیید و بروزرسانی";console.error(err);}
 });
+on("manualRefreshBtn","click",async function(){
+  this.disabled=true;
+  try{if("serviceWorker" in navigator){var reg=await navigator.serviceWorker.getRegistration();if(reg)await reg.update();}}
+  catch(err){console.warn("Manual update check:",err);}
+  location.reload();
+});
+window.addEventListener("online",checkRemoteVersion);
+window.addEventListener("load",function(){checkRemoteVersion();setInterval(checkRemoteVersion,60000);});
+
+/* SERVICE WORKER */
 if("serviceWorker" in navigator){
   window.addEventListener("load",function(){
     navigator.serviceWorker.register("./service-worker.js").then(function(reg){
-      appUpdateRegistration=reg;
-      reg.addEventListener("updatefound",function(){
-        var worker=reg.installing;
-        if(!worker)return;
-        worker.addEventListener("statechange",function(){
-          if(worker.state==="installed"&&navigator.serviceWorker.controller)showMandatoryUpdate(APP_VERSION);
-        });
-      });
-      checkRemoteAppVersion(false);
-      setInterval(function(){
-        reg.update().catch(function(){});
-        checkRemoteAppVersion(false);
-      },60000);
-      document.addEventListener("visibilitychange",function(){
-        if(document.visibilityState==="visible"){
-          reg.update().catch(function(){});
-          checkRemoteAppVersion(false);
-        }
-      });
-    }).catch(function(err){console.warn("Service worker registration:",err);});
+      reg.addEventListener("updatefound",function(){ var nw=reg.installing; if(!nw) return; nw.addEventListener("statechange",function(){ if(nw.state==="installed"&&navigator.serviceWorker.controller) showSwUpdateToast(reg); }); });
+      setInterval(function(){ reg.update(); },60000);
+    }).catch(function(){});
   });
+}
+function showSwUpdateToast(reg){
+  var t=document.getElementById("swUpdateToast"); t.style.display="block";
+  document.getElementById("swUpdateBtn").onclick=function(){
+    if(reg.waiting) reg.waiting.postMessage("SKIP_WAITING");
+    navigator.serviceWorker.addEventListener("controllerchange",function(){ location.reload(); });
+    t.style.display="none";
+  };
 }
 
 /* PUBLIC API */
@@ -1883,5 +1916,6 @@ openDB().then(async function(){
 
 })();
 </script>
-<footer>Designed by Hossein</footer>
+
+
 </body></html>
