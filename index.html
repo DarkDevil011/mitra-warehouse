@@ -498,6 +498,34 @@ body{background:radial-gradient(900px 650px at 95% -5%,rgba(167,139,250,.22),tra
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 body.perf .sidebar,body.perf .topbar,body.perf .bottom-nav,body.perf .card.glass,body.perf .photo-card,body.perf .inbox-item{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
 
+  .photo-card img{cursor:zoom-in}
+.photo-lightbox{
+  position:fixed;inset:0;z-index:9999;display:none;
+  align-items:center;justify-content:center;flex-direction:column;
+  padding:60px 12px 20px;background:rgba(0,0,0,.96);
+}
+.photo-lightbox.show{display:flex}
+.photo-lightbox-stage{
+  width:100%;height:calc(100% - 45px);
+  display:flex;align-items:center;justify-content:center;overflow:auto;
+}
+.photo-lightbox-stage img{
+  max-width:100%;max-height:100%;width:auto;height:auto;
+  object-fit:contain;border-radius:8px;cursor:zoom-in;
+}
+.photo-lightbox-stage img.zoomed{
+  max-width:none;max-height:none;transform:scale(1.8);
+  cursor:zoom-out;
+}
+.photo-lightbox-close,.photo-lightbox-zoom{
+  position:absolute;top:12px;height:44px;padding:0 14px;
+  border:1px solid #777;border-radius:12px;
+  background:#292435;color:white;font:inherit;cursor:pointer;
+}
+.photo-lightbox-close{right:12px;font-size:28px}
+.photo-lightbox-zoom{left:12px}
+.photo-lightbox-caption{color:white;text-align:center;margin-top:10px}
+body.photo-view-open{overflow:hidden}
 </style>
   <meta property="og:image" content="https://bolt.new/static/og_default.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -1634,7 +1662,47 @@ document.getElementById("photoUploadBtn").addEventListener("click",async functio
   finally{btn.disabled=false;}
 });
 document.getElementById("refreshPhotosBtn").addEventListener("click",renderPhotos);
-document.getElementById("photoGallery").addEventListener("click",async function(e){
+
+var photoLightbox=document.getElementById("photoLightbox");
+var photoLightboxImage=document.getElementById("photoLightboxImage");
+
+function closePhotoLightbox(){
+  photoLightbox.classList.remove("show");
+  photoLightboxImage.classList.remove("zoomed");
+  document.body.classList.remove("photo-view-open");
+}
+
+document.getElementById("photoLightboxClose").onclick=closePhotoLightbox;
+
+document.getElementById("photoLightboxZoom").onclick=function(){
+  photoLightboxImage.classList.toggle("zoomed");
+  this.textContent=photoLightboxImage.classList.contains("zoomed")
+    ?"کوچک‌نمایی":"بزرگ‌نمایی";
+};
+
+photoLightboxImage.onclick=function(){
+  this.classList.toggle("zoomed");
+};
+
+photoLightbox.onclick=function(e){
+  if(e.target===photoLightbox) closePhotoLightbox();
+};
+
+document.addEventListener("keydown",function(e){
+  if(e.key==="Escape") closePhotoLightbox();
+});
+
+document.getElementById("photoGallery").addEventListener("click",function(e){
+  var img=e.target.closest(".photo-card img");
+  if(!img)return;
+
+  photoLightboxImage.src=img.currentSrc||img.src;
+  document.getElementById("photoLightboxCaption").textContent=img.alt||"";
+  photoLightbox.classList.add("show");
+  document.body.classList.add("photo-view-open");
+});
+  
+  document.getElementById("photoGallery").addEventListener("click",async function(e){
   var btn=e.target.closest("[data-photo-delete]");if(!btn)return;
   if(!confirm("این تصویر برای همه کاربران حذف شود؟"))return;
   btn.disabled=true;
@@ -1688,5 +1756,12 @@ openDB().then(async function(){
 })();
 </script>
 
-
+<div id="photoLightbox" class="photo-lightbox">
+  <button id="photoLightboxClose" class="photo-lightbox-close">×</button>
+  <button id="photoLightboxZoom" class="photo-lightbox-zoom">بزرگ‌نمایی</button>
+  <div class="photo-lightbox-stage">
+    <img id="photoLightboxImage" alt="نمایش تصویر">
+  </div>
+  <div id="photoLightboxCaption" class="photo-lightbox-caption"></div>
+</div>
 </body></html>
