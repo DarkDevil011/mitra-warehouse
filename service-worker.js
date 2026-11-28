@@ -1,5 +1,5 @@
-/* MITRA WAREHOUSE PWA — v1.69.85 */
-const CACHE_NAME = "mitra-warehouse-v4";
+/* MITRA WAREHOUSE PWA — v1.69.86 */
+const CACHE_NAME = "mitra-warehouse-v5";
 const APP_SHELL = [
   "./",
   "./index.html",
