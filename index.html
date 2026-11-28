@@ -527,7 +527,7 @@ body.perf .sidebar,body.perf .topbar,body.perf .bottom-nav,body.perf .card.glass
 .photo-lightbox-caption{color:white;text-align:center;margin-top:10px}
 body.photo-view-open{overflow:hidden}
 
-/* ================= VERSION 1.69.85 — FLOATING GLASS MOBILE NAV ================= */
+/* ================= VERSION 1.69.86 — FLOATING GLASS MOBILE NAV ================= */
 .app-footer{padding:22px 8px 8px;text-align:center;color:rgba(218,220,238,.48);font-size:11px;letter-spacing:.35px}
 .app-footer span{margin-right:6px;opacity:.65}
 .operations-actions{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:14px}
@@ -568,6 +568,74 @@ body.photo-view-open{overflow:hidden}
 .mandatory-update-card{width:min(420px,100%);padding:26px;border-radius:24px;text-align:center;background:rgba(25,22,42,.94)!important}
 .mandatory-update-icon{width:58px;height:58px;margin:0 auto 12px;border-radius:19px;display:grid;place-items:center;background:rgba(167,139,250,.18);color:#c4b5fd;font-size:32px}
 .mandatory-update-card h2{font-size:20px;margin:0 0 8px}.mandatory-update-card p{color:var(--muted);font-size:13px;line-height:1.9;margin:0 0 20px}
+
+
+
+/* ================= AUTOMATIC CHRISTMAS THEME — 25–28 DECEMBER (TEHRAN) ================= */
+body.christmas-theme{
+  --bg:#071b15;--bg2:#0b2a20;--bg3:#14392b;
+  --pri:#b72c45;--pri2:#f0c77b;--pri-deep:#761d30;
+  --gold:#dfb967;--gold2:#f4dda0;
+  --muted:#d0dfd5;--muted2:#95aa9d;
+  --glass:rgba(255,255,255,.065);--glass2:rgba(255,255,255,.095);
+  --glass-brd:rgba(223,190,126,.19);
+  --shadow:0 16px 48px rgba(0,0,0,.32);--glow:0 0 24px rgba(183,44,69,.25);
+  color-scheme:dark;
+  background:radial-gradient(950px 620px at 90% -12%,rgba(183,44,69,.22),transparent 60%),
+    radial-gradient(900px 600px at 5% 110%,rgba(30,112,72,.25),transparent 60%),
+    linear-gradient(145deg,#06140f 0%,#10271c 55%,#071710 100%);
+  background-attachment:fixed;
+}
+body.christmas-theme .sidebar{background:linear-gradient(180deg,rgba(8,38,28,.98),rgba(5,20,16,.98));border-color:rgba(230,197,135,.2)}
+body.christmas-theme .topbar,
+body.christmas-theme .bottom-nav,
+body.christmas-theme .card.glass,
+body.christmas-theme .modal,
+body.christmas-theme .photo-card,
+body.christmas-theme .inbox-item,
+body.christmas-theme .stat-card,
+body.christmas-theme .panel,
+body.christmas-theme .dropdown-menu{
+  background:linear-gradient(145deg,rgba(20,65,46,.78),rgba(7,31,23,.91));
+  border-color:rgba(230,197,135,.18);
+  box-shadow:0 16px 42px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.08);
+}
+body.christmas-theme .brand-logo,
+body.christmas-theme .btn-primary,
+body.christmas-theme .bn-plus{
+  background:linear-gradient(145deg,#bd3049,#761d30);
+  box-shadow:0 8px 22px rgba(145,28,49,.32),inset 0 1px 0 rgba(255,255,255,.16);
+}
+body.christmas-theme .btn-gold{background:linear-gradient(135deg,#f4dda0,#c99b4d);color:#24190b}
+body.christmas-theme .nav-item.active{background:linear-gradient(100deg,rgba(38,132,83,.28),rgba(38,132,83,.08));box-shadow:inset -3px 0 0 #e1bd72,inset 0 0 0 1px rgba(225,189,114,.18);color:#fff}
+body.christmas-theme .bn-item.active{color:#f5dca0;background:rgba(38,132,83,.22);box-shadow:inset 0 0 0 1px rgba(225,189,114,.2)}
+body.christmas-theme .quick-btn{border-color:rgba(223,190,126,.2);background:linear-gradient(145deg,rgba(24,78,54,.78),rgba(8,37,26,.88))}
+body.christmas-theme .quick-btn:hover{border-color:rgba(222,81,98,.55);box-shadow:0 12px 26px rgba(0,0,0,.24)}
+body.christmas-theme .input,
+body.christmas-theme .select,
+body.christmas-theme .textarea{background:rgba(4,23,16,.62);border-color:rgba(223,190,126,.2)}
+body.christmas-theme .input:focus,
+body.christmas-theme .select:focus,
+body.christmas-theme .textarea:focus{border-color:#e0bb70;box-shadow:0 0 0 3px rgba(224,187,112,.16)}
+body.christmas-theme .section-kicker{color:#f0cf83}
+body.christmas-theme .operation-symbol{background:rgba(35,128,79,.2);color:#f0cf83}
+body.christmas-theme .support-icon{background:linear-gradient(145deg,rgba(35,128,79,.28),rgba(117,29,48,.2));border-color:rgba(223,190,126,.24);color:#f5dca0}
+body.christmas-theme .floating-support{background:linear-gradient(135deg,#bd3049,#761d30);border-color:rgba(240,199,123,.48)}
+body.christmas-theme .tag{background:rgba(183,44,69,.18);color:#f2c5bd}
+body.christmas-theme .tag.in{background:rgba(35,128,79,.2);color:#a7e0bd}
+body.christmas-theme .inbox-badge{background:#e8c77d;color:#21190d}
+body.christmas-theme ::selection{background:rgba(183,44,69,.45);color:#fff}
+#christmasDecor{position:fixed;inset:0;z-index:25;overflow:hidden;pointer-events:none;display:none}
+body.christmas-theme #christmasDecor{display:block}
+#christmasDecor::before{content:"";position:absolute;left:0;right:0;top:0;height:18px;opacity:.82;
+  background:radial-gradient(circle,#f6d47c 0 3px,transparent 4px) 0 0/52px 18px repeat-x;
+  filter:drop-shadow(0 1px 5px rgba(246,212,124,.5))}
+#christmasDecor::after{content:"";position:absolute;left:0;right:0;top:5px;height:12px;border-top:1px solid rgba(226,194,132,.32);border-radius:0 0 50% 50%}
+.christmas-snowflake{position:absolute;top:-28px;left:var(--snow-left);font-size:var(--snow-size);line-height:1;color:rgba(255,255,255,.78);text-shadow:0 0 8px rgba(255,255,255,.35);animation:mitraChristmasSnow var(--snow-duration) linear var(--snow-delay) infinite;will-change:transform,opacity}
+@keyframes mitraChristmasSnow{0%{transform:translate3d(0,-5vh,0) rotate(0deg);opacity:0}10%{opacity:.8}90%{opacity:.7}100%{transform:translate3d(var(--snow-drift),112vh,0) rotate(360deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){#christmasDecor .christmas-snowflake{display:none!important}}
+body.perf #christmasDecor .christmas-snowflake{display:none!important}
+@media print{#christmasDecor{display:none!important}}
 
 </style>
   <meta property="og:image" content="https://bolt.new/static/og_default.png">
@@ -913,7 +981,7 @@ body.photo-view-open{overflow:hidden}
           </div>
         </div>
       </section>
-      <footer class="app-footer">Designed by Hossein · MITRA WAREHOUSE <span id="footerVersion">1.69.85</span></footer>
+      <footer class="app-footer">Designed by Hossein · MITRA WAREHOUSE <span id="footerVersion">1.69.86</span></footer>
     </main>
     <button type="button" class="floating-support" id="floatingSupportBtn" aria-label="رفتن به پشتیبانی"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.7 7.4L3 21l2.1-5.3A8.5 8.5 0 1 1 21 11.5Z"></path><path d="M8 12h8M8 8.5h5"></path></svg><span>پشتیبانی</span></button>
   </div>
@@ -989,7 +1057,7 @@ async function checkRemoteVersion(){
 var DB_NAME = "warehouseDB";
 var DB_VERSION = 1;
 var STORES = ["products","transactions","history","recycleBin","settings"];
-var APP_VERSION = "1.69.85";
+var APP_VERSION = "1.69.86";
 var PAGE_SIZE = 20;
 var JALALI_MONTHS = ["فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"];
 var JALALI_MONTH_CHART = ["فرو","ارد","خرداد","تیر","مرداد","شهر","مهر","آبان","آذر","دی","بهمن","اسفند"];
@@ -1052,11 +1120,11 @@ var SUPABASE_URL="https://pinunrgptcxyhffzfjhp.supabase.co";
 var SUPABASE_PUBLISHABLE_KEY="sb_publishable_wf7yGRcTN_qiQd4-e6Czrw_vo97WuXT";
 
 function showAuthGate(message){
-  var gate=document.getElementById("authGate");
-  gate.style.display="flex";
-  document.getElementById("authError").textContent=message||"";
+  var gate=document.getElementById("authGate"),errorNode=document.getElementById("authError");
+  if(gate)gate.style.display="flex";
+  if(errorNode)errorNode.textContent=message||"";
 }
-function hideAuthGate(){ document.getElementById("authGate").style.display="none"; }
+function hideAuthGate(){ var gate=document.getElementById("authGate"); if(gate)gate.style.display="none"; }
 function getRecordId(store,val){
   if(store==="settings") return String(val.key);
   return String(val.id);
@@ -1070,24 +1138,32 @@ async function openDB(){
   var session=sessionResult.data&&sessionResult.data.session;
   if(!session){
     showAuthGate("");
-    await new Promise(function(resolve){
+    await new Promise(function(resolve,reject){
       var form=document.getElementById("authForm");
+      if(!form){reject(new Error("فرم ورود در صفحه پیدا نشد."));return;}
       var handler=async function(e){
         e.preventDefault();
         var btn=document.getElementById("authSubmit");
         var err=document.getElementById("authError");
-        btn.disabled=true; btn.textContent="در حال ورود…"; err.textContent="";
-        var result=await sb.auth.signInWithPassword({
-          email:document.getElementById("authEmail").value.trim(),
-          password:document.getElementById("authPassword").value
-        });
-        if(result.error){ err.textContent="ورود ناموفق بود؛ ایمیل و رمز عبور را بررسی کن."; btn.disabled=false; btn.textContent="ورود"; return; }
-        form.removeEventListener("submit",handler);
-        hideAuthGate(); resolve();
+        if(btn){btn.disabled=true;btn.textContent="در حال ورود…";}
+        if(err)err.textContent="";
+        try{
+          var email=document.getElementById("authEmail"),password=document.getElementById("authPassword");
+          if(!email||!password)throw new Error("فیلدهای ورود پیدا نشدند.");
+          var result=await sb.auth.signInWithPassword({email:email.value.trim(),password:password.value});
+          if(result.error)throw result.error;
+          form.removeEventListener("submit",handler);
+          hideAuthGate();resolve();
+        }catch(loginError){
+          console.error("MITRA login:",loginError);
+          if(err)err.textContent="ورود ناموفق بود؛ اتصال اینترنت، ایمیل و رمز عبور را بررسی کنید.";
+          if(btn){btn.disabled=false;btn.textContent="ورود";}
+        }
       };
       form.addEventListener("submit",handler);
     });
     session=(await sb.auth.getSession()).data.session;
+    if(!session)throw new Error("نشست کاربری پس از ورود ایجاد نشد.");
   }
   currentUser=session.user;
   var profileResult=await sb.from("profiles").select("display_name").eq("id",currentUser.id).maybeSingle();
@@ -1136,14 +1212,17 @@ async function dbPut(store,val){
   return val;
 }
 async function dbDelete(store,key){
+  if(!sb||!currentUser) throw new Error("اتصال دیتابیس آماده نیست؛ ابتدا وارد حساب کاربری شوید.");
   var q=await sb.from("warehouse_records").delete().eq("store_name",store).eq("record_id",String(key));
   if(q.error) throw q.error;
 }
 async function dbClear(store){
+  if(!sb||!currentUser) throw new Error("اتصال دیتابیس آماده نیست؛ ابتدا وارد حساب کاربری شوید.");
   var q=await sb.from("warehouse_records").delete().eq("store_name",store).not("record_id","is",null);
   if(q.error) throw q.error;
 }
 async function dbCount(store){
+  if(!sb||!currentUser) throw new Error("اتصال دیتابیس آماده نیست؛ ابتدا وارد حساب کاربری شوید.");
   var q=await sb.from("warehouse_records").select("record_id",{count:"exact",head:true}).eq("store_name",store);
   if(q.error) throw q.error;
   return q.count||0;
@@ -1344,7 +1423,7 @@ function drawStatusChart(products){
 var invPage=1, invFiltered=[], invFilters={name:"",brand:"",size:"",status:""};
 on("addProductBtn","click",function(){ openProductModal(null); });
 ["fName","fBrand","fSize","fStatus"].forEach(function(id){
-  document.getElementById(id).addEventListener("input",function(){
+  on(id,"input",function(){
     invFilters.name=document.getElementById("fName").value.trim().toLowerCase();
     invFilters.brand=document.getElementById("fBrand").value.trim().toLowerCase();
     invFilters.size=document.getElementById("fSize").value.trim().toLowerCase();
@@ -1544,7 +1623,7 @@ on("reportRanges","click",function(e){
 });
 on("applyCustom","click",function(){reportPage=1;renderReports();});
 ["rptType","rptName","rptBrand","rptSize","rptCustomer","rptInvoice"].forEach(function(id){
-  document.getElementById(id).addEventListener("input",function(){reportPage=1;renderReports();});
+  on(id,"input",function(){reportPage=1;renderReports();});
 });
 on("rptType","change",function(){reportPage=1;renderReports();});
 function getReportDateRange(){
@@ -1904,6 +1983,47 @@ function showSwUpdateToast(reg){
 
 /* PUBLIC API */
 window.app={editProduct:editProduct,deleteProduct:deleteProduct,restoreProduct:restoreProduct,purgeProduct:purgeProduct,markInboxRead:markInboxRead,closeModal:closeModal};
+
+
+
+/* AUTOMATIC CHRISTMAS THEME — annually from Dec 25 through Dec 28, Asia/Tehran */
+var christmasThemeActive=null,christmasDecorNode=null;
+function tehranCalendarParts(date){
+  var parts=new Intl.DateTimeFormat("en-US",{timeZone:"Asia/Tehran",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(date);
+  var result={};parts.forEach(function(part){if(part.type!=="literal")result[part.type]=Number(part.value);});
+  return result;
+}
+function isChristmasWindow(date){
+  try{var p=tehranCalendarParts(date);return p.month===12&&p.day>=25&&p.day<=28;}
+  catch(error){console.warn("Christmas timezone check:",error);return false;}
+}
+function createChristmasDecor(){
+  var root=document.createElement("div");root.id="christmasDecor";root.setAttribute("aria-hidden","true");
+  var symbols=["❄","✦","❅"];
+  for(var i=0;i<20;i++){
+    var flake=document.createElement("span");flake.className="christmas-snowflake";flake.textContent=symbols[i%symbols.length];
+    flake.style.setProperty("--snow-left",(Math.random()*100).toFixed(2)+"vw");
+    flake.style.setProperty("--snow-size",(10+Math.random()*11).toFixed(1)+"px");
+    flake.style.setProperty("--snow-duration",(13+Math.random()*15).toFixed(1)+"s");
+    flake.style.setProperty("--snow-delay",(-Math.random()*26).toFixed(1)+"s");
+    flake.style.setProperty("--snow-drift",((Math.random()*90)-45).toFixed(1)+"px");
+    root.appendChild(flake);
+  }
+  document.body.appendChild(root);return root;
+}
+function applyChristmasTheme(){
+  var active=isChristmasWindow(new Date());
+  if(active===christmasThemeActive)return;
+  christmasThemeActive=active;
+  document.body.classList.toggle("christmas-theme",active);
+  var themeMeta=document.querySelector('meta[name="theme-color"]');
+  if(themeMeta)themeMeta.setAttribute("content",active?"#071b15":"#0b1020");
+  if(active){if(!christmasDecorNode)christmasDecorNode=createChristmasDecor();}
+  else if(christmasDecorNode){christmasDecorNode.remove();christmasDecorNode=null;}
+}
+applyChristmasTheme();
+setInterval(applyChristmasTheme,60000);
+document.addEventListener("visibilitychange",function(){if(!document.hidden)applyChristmasTheme();});
 
 /* INIT */
 openDB().then(async function(){
